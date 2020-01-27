@@ -7,6 +7,9 @@ namespace AgileCmd
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            Display test = new Display();
+            test.populateDataTest();
+            test.displayList();
         }
     }
 }
