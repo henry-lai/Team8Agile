@@ -41,6 +41,20 @@ namespace AgileGUI.Pages
             
             UserInput = SearchString;
             
+            // if userInput not empty then
+
+            // call
+            // validate
+            // search db
+            // create dataRow results
+            // calculate distance
+            // calculate best
+            // calc closest
+            // calc cheapest
+            // display results
+
+
+
         }
     }
 }
