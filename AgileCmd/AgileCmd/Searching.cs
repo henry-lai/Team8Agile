@@ -18,7 +18,7 @@ namespace AgileCmd
 
         public List<DataRow> Sort(List<DataRow> data)
         {
-            var sortedList = data.OrderBy(si => si.Cost).ToList();
+            var sortedList = data.OrderBy(si => si.cost).ToList();
             return sortedList;
         }
 

@@ -67,7 +67,7 @@ namespace AgileCmd
                             double cost = Convert.ToDouble(oReader["provider_id"].ToString());
 
                             Address add = new Address(street, city, state, zip);
-                            DataRow dt = new DataRow(definition, providerID, providerName, add, reference, discharge, cost);
+                            DataRow dt = new DataRow(definition, providerID, providerName, add, reference, discharge, cost,0);
 
                             data.Add(dt);
                         }

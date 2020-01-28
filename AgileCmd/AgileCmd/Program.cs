@@ -8,7 +8,7 @@ namespace AgileCmd
         static void Main(string[] args)
         {
   
-            string searchTerm = "par";
+            string searchTerm = "023";
             Validate validate = new Validate();
             if (validate.validateCode(searchTerm))
             {
@@ -17,8 +17,15 @@ namespace AgileCmd
                 List<DataRow> data = search.SearchByCode(searchTerm);
 
                 Display test = new Display();
-                test.populateDataTest();
-                test.displayList();
+                test.populateData(data);
+                test.displayFullList();
+                Console.WriteLine("************************************************************************************"); Console.WriteLine("************************************************************************************");
+                Console.WriteLine("************************************************************************************");
+
+                Console.WriteLine("************************************************************************************");
+                Console.WriteLine("************************************************************************************");
+
+                test.displayCheapest(data);
             }
             else { Console.WriteLine("Invalid input"); }
            
