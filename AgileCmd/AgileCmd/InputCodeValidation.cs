@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-public class Class1
+public class Validate
 {
+    public string cleanInput { get; set; }
+
+    public Validate() {
+        cleanInput = "";
+    }
     public string displayuserMsg()
     {
         string message = "Please Enter Code or Procedure";
@@ -31,7 +36,7 @@ public class Class1
     {
         try
         {
-            string cleanInput = Regex.Replace(UncleanInput, @"[^\w.,@\%\s]", "",
+             cleanInput = Regex.Replace(UncleanInput, @"[^\w.,@\%\s]", "",
                                  RegexOptions.None, TimeSpan.FromSeconds(1.5));
 
             return true;
@@ -66,6 +71,7 @@ public class Class1
         else //Success state, input is valid.
         {
             successMsg();
+
             return true;
         }
     }

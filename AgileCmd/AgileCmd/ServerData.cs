@@ -1,21 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
-using System.Text;
 
 namespace AgileCmd
 {
     public class ServerData
     {
-        List<DataRow> data;
-
-        /* redo most of this *********************************************************************************/
+        List<DataRow> data;     
+        string connectionString = null;
+        SqlConnection conn;
 
         public ServerData()
         {
-            string connectionString = null;
-            SqlConnection conn;
-
             connectionString = "Server = tcp:agileuniprojectserver.database.windows.net,1433; " +
                 "Initial Catalog = AgileDB; " +
                 "Persist Security Info = False; " +
@@ -25,22 +22,37 @@ namespace AgileCmd
                 "Encrypt = True; " +
                 "TrustServerCertificate = False; " +
                 "Connection Timeout = 30;";
+        }
 
+        public List<DataRow> ReadDatabase(string searchItem) {
             conn = new SqlConnection(connectionString);
 
             try
             {
                 data = new List<DataRow>();
-                //List<Address> address = new List<Address>();
 
                 using (conn)
                 {
-                    string oString = "Select * from dbo.Medical_Procedure"; // alter to use stored proc 
-                    SqlCommand oCommand = new SqlCommand(oString, conn);
+                    string spName = @"dbo.[uspSearchForProcedure]";
+
+                    //define the SqlCommand object
+                    SqlCommand oCommand = new SqlCommand(spName, conn);
+
+                    //Set SqlParameter - the user input parameter value will be set from the command line
+                    SqlParameter param1 = new SqlParameter();
+                    param1.ParameterName = "@UserInput";
+                    param1.SqlDbType = SqlDbType.Text;
+                    param1.Value = searchItem;
+
+                    //add the parameter to the SqlCommand object
+                    oCommand.Parameters.Add(param1);
                     conn.Open();
+
+                    oCommand.CommandType = CommandType.StoredProcedure;
 
                     using (SqlDataReader oReader = oCommand.ExecuteReader())
                     {
+
                         while (oReader.Read())
                         {
                             String definition = oReader["drg_definition"].ToString();
@@ -51,7 +63,7 @@ namespace AgileCmd
                             String state = oReader["provider_state"].ToString();
                             String zip = oReader["provider_zip"].ToString();
                             String reference = oReader["hospital_referral_region"].ToString();
-                            long discharge = Convert.ToInt64(oReader["total_discharge"].ToString());
+                            int discharge = Convert.ToInt32(oReader["total_discharges"].ToString());
                             double cost = Convert.ToDouble(oReader["provider_id"].ToString());
 
                             Address add = new Address(street, city, state, zip);
@@ -67,13 +79,10 @@ namespace AgileCmd
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex);
             }
-
+            return data;
 
         }
-
-        public List<DataRow> Data { get => data; set => data = value; }
-
     }
 }
