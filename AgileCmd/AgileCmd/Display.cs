@@ -8,64 +8,64 @@ namespace AgileCmd
     public class Display
     {
 
-        public List<DataRow> data = new List<DataRow>();
-        public List<string> wrongdata = new List<string>();
+        //public List<DataRow> data = new List<DataRow>();
+        //public List<string> wrongdata = new List<string>();
 
 
         
 
-        public void populateDataTest()
-        {
+        //public void populateDataTest()
+       // {
 
-            Address Address1 = new Address("Big Street", "LargeTown", "BIG", "534 453");
-            DataRow line1 = new DataRow("023 - Heart Transplant", "10001", "SOUTHEAST ALBAMA MEDICAL CENTER", Address1, "AL - Dothan", 28, 25000.00, 1000);
-            this.data.Add(line1);
+      //      Address Address1 = new Address("Big Street", "LargeTown", "BIG", "534 453");
+    //        DataRow line1 = new DataRow("023 - Heart Transplant", "10001", "SOUTHEAST ALBAMA MEDICAL CENTER", Address1, "AL - Dothan", 28, 25000.00, 1000);
+  //          this.data.Add(line1);
 
-            Address Address2 = new Address("Big Street", "LargeTown", "BIG", "534 453");
-            DataRow line2 = new DataRow("023 - Heart Transplant", "10001", "SOUTHEAST ALBAMA MEDICAL CENTER", Address1, "AL - Dothan", 28, 40000.00, 2);
-            this.data.Add(line2);
+//            Address Address2 = new Address("Big Street", "LargeTown", "BIG", "534 453");
+        //    DataRow line2 = new DataRow("023 - Heart Transplant", "10001", "SOUTHEAST ALBAMA MEDICAL CENTER", Address1, "AL - Dothan", 28, 40000.00, 2);
+         //   this.data.Add(line2);
 
-            Address Address3 = new Address("Big Street", "LargeTown", "BIG", "534 453");
-            DataRow line3 = new DataRow("023 - Heart Transplant", "10001", "SOUTHEAST ALBAMA MEDICAL CENTER", Address1, "AL - Dothan", 28, 2000.00, 350);
-            this.data.Add(line3);
+            //Address Address3 = new Address("Big Street", "LargeTown", "BIG", "534 453");
+          //  DataRow line3 = new DataRow("023 - Heart Transplant", "10001", "SOUTHEAST ALBAMA MEDICAL CENTER", Address1, "AL - Dothan", 28, 2000.00, 350);
+        //    this.data.Add(line3);
 
-            Address Address4 = new Address("Big Street", "LargeTown", "BIG", "534 453");
-            DataRow line4 = new DataRow("023 - Heart Transplant", "10001", "SOUTHEAST ALBAMA MEDICAL CENTER", Address1, "AL - Dothan", 28, 2500000.0, 10000);
-            this.data.Add(line4);
+      //      Address Address4 = new Address("Big Street", "LargeTown", "BIG", "534 453");
+    //        DataRow line4 = new DataRow("023 - Heart Transplant", "10001", "SOUTHEAST ALBAMA MEDICAL CENTER", Address1, "AL - Dothan", 28, 2500000.0, 10000);
+  //          this.data.Add(line4);
              
-            Address Address5 = new Address("Big Street", "LargeTown", "BIG", "534 453");
-            DataRow line5 = new DataRow("023 - Heart Transplant", "10001", "SOUTHEAST ALBAMA MEDICAL CENTER", Address1, "AL - Dothan", 28, 256000.00, 4678);
-            this.data.Add(line5);
+           // Address Address5 = new Address("Big Street", "LargeTown", "BIG", "534 453");
+         //   DataRow line5 = new DataRow("023 - Heart Transplant", "10001", "SOUTHEAST ALBAMA MEDICAL CENTER", Address1, "AL - Dothan", 28, 256000.00, 4678);
+       //     this.data.Add(line5);
 
-            Address Address6 = new Address("Big Street", "LargeTown", "BIG", "534 453");
-            DataRow line6 = new DataRow("023 - Heart Transplant", "10001", "SOUTHEAST ALBAMA MEDICAL CENTER", Address1, "AL - Dothan", 28, 2570000.00, 2.5);
-            this.data.Add(line6);
+     //       Address Address6 = new Address("Big Street", "LargeTown", "BIG", "534 453");
+   //         DataRow line6 = new DataRow("023 - Heart Transplant", "10001", "SOUTHEAST ALBAMA MEDICAL CENTER", Address1, "AL - Dothan", 28, 2570000.00, 2.5);
+ //           this.data.Add(line6);
 
             
-        }
+ //       }
 
 
 
 
 
-        public void populateData(List<DataRow> newList) {
+       public void populateData(List<DataRow> newList) {
 
 
             //listReceived = Search();
 
             List<DataRow> tempList = new List<DataRow>();
-            tempList = data;
-            data = newList;
+            tempList = newList;
             if (validateList(newList) == true)
             {
                 Console.WriteLine("Recieved Valid List");
             }
             else if(validateList(newList) == false)
             {
-                data = tempList;
+                newList = tempList;
                 Console.WriteLine("Recieved InValid List");
             }
         }
+        
 
         public bool validateList(List<DataRow> listToValidate)
         {
@@ -90,13 +90,13 @@ namespace AgileCmd
         }
 
 
-        public void displayFullList()
+        public void displayFullList(List<DataRow> listToDisplay)
         {
             //populate display list with data given from search
             Console.WriteLine("Definition - Provider ID - Provider Name - Street - City - State - Zip Code - Reference - Total Discharge - Cost - Distance From User");
-            for (int i = 0; i < data.Count; i++)
+            for (int i = 0; i < listToDisplay.Count; i++)
             {
-                displayLine(data[i]);
+                displayLine(listToDisplay[i]);
             }
 
         }

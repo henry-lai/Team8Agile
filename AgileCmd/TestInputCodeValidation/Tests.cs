@@ -17,7 +17,7 @@ namespace TestInputCodeValidation
         public void Setup()
         {
             sd = new ServerData();
-            data = sd.Data;
+            data = sd.data;
             s = new Searching();
         }
 
@@ -45,7 +45,7 @@ namespace TestInputCodeValidation
             dataSet.Add(dr);
             dataSet.Add(dr1);
             dataSet.Add(dr2);*/
-            List<DataRow> t = s.SearchByCode("176", data);
+            List<DataRow> t = s.SearchByCode("176");
             //CollectionAssert.AreEqual(t, dataSet2);
             CollectionAssert.IsNotEmpty(t);
         }
@@ -55,9 +55,9 @@ namespace TestInputCodeValidation
         {
             Searching s = new Searching();
             Address ad = new Address("17 Hawkhill", "Dundee", "Angus", "DD15DL");
-            DataRow dr = new DataRow("123 - Surgery", "001235", "Bill", ad, "JJA", 112536, 100.55);
-            DataRow dr1 = new DataRow("556 - Opp", "001235", "Bill", ad, "JJA", 112536, 233.55);
-            DataRow dr2 = new DataRow("567 - IIDA HEart", "001235", "Bill", ad, "JJA", 112536, 333.55);
+            DataRow dr = new DataRow("123 - Surgery", "001235", "Bill", ad, "JJA", 112536, 100.55,0);
+            DataRow dr1 = new DataRow("556 - Opp", "001235", "Bill", ad, "JJA", 112536, 233.55,0);
+            DataRow dr2 = new DataRow("567 - IIDA HEart", "001235", "Bill", ad, "JJA", 112536, 333.55,0);
 
             var dataSet = new List<DataRow>();
             dataSet.Add(dr2);

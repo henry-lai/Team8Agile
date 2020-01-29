@@ -7,7 +7,8 @@ namespace AgileCmd
 {
     public class ServerData
     {
-        List<DataRow> data;     
+        public List<DataRow> data { get; set; }
+      //  List<DataRow> data;
         string connectionString = null;
         SqlConnection conn;
 
@@ -40,7 +41,7 @@ namespace AgileCmd
 
                     //Set SqlParameter - the user input parameter value will be set from the command line
                     SqlParameter param1 = new SqlParameter();
-                    param1.ParameterName = "@UserInput";
+                    param1.ParameterName = "UserInput";
                     param1.SqlDbType = SqlDbType.Text;
                     param1.Value = searchItem;
 
@@ -64,7 +65,7 @@ namespace AgileCmd
                             String zip = oReader["provider_zip"].ToString();
                             String reference = oReader["hospital_referral_region"].ToString();
                             int discharge = Convert.ToInt32(oReader["total_discharges"].ToString());
-                            double cost = Convert.ToDouble(oReader["provider_id"].ToString());
+                            Double cost = Convert.ToDouble(oReader["average_total_payments"].ToString());
 
                             Address add = new Address(street, city, state, zip);
                             DataRow dt = new DataRow(definition, providerID, providerName, add, reference, discharge, cost,0);

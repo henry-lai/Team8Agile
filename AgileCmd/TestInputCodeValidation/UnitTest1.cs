@@ -14,7 +14,7 @@ namespace TestInputValidation
         [Test]
         public void Test1()
         {
-            Class1 test1 = new Class1();
+            Validate test1 = new Validate();
             test1.displayuserMsg();
 
             //string correctInput = "123";
