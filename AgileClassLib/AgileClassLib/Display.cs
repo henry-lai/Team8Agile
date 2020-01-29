@@ -7,47 +7,7 @@ namespace AgileCmd
 {
     public class Display
     {
-
-        //public List<DataRow> data = new List<DataRow>();
-        //public List<string> wrongdata = new List<string>();
-
-
-        
-
-        //public void populateDataTest()
-       // {
-
-      //      Address Address1 = new Address("Big Street", "LargeTown", "BIG", "534 453");
-    //        DataRow line1 = new DataRow("023 - Heart Transplant", "10001", "SOUTHEAST ALBAMA MEDICAL CENTER", Address1, "AL - Dothan", 28, 25000.00, 1000);
-  //          this.data.Add(line1);
-
-//            Address Address2 = new Address("Big Street", "LargeTown", "BIG", "534 453");
-        //    DataRow line2 = new DataRow("023 - Heart Transplant", "10001", "SOUTHEAST ALBAMA MEDICAL CENTER", Address1, "AL - Dothan", 28, 40000.00, 2);
-         //   this.data.Add(line2);
-
-            //Address Address3 = new Address("Big Street", "LargeTown", "BIG", "534 453");
-          //  DataRow line3 = new DataRow("023 - Heart Transplant", "10001", "SOUTHEAST ALBAMA MEDICAL CENTER", Address1, "AL - Dothan", 28, 2000.00, 350);
-        //    this.data.Add(line3);
-
-      //      Address Address4 = new Address("Big Street", "LargeTown", "BIG", "534 453");
-    //        DataRow line4 = new DataRow("023 - Heart Transplant", "10001", "SOUTHEAST ALBAMA MEDICAL CENTER", Address1, "AL - Dothan", 28, 2500000.0, 10000);
-  //          this.data.Add(line4);
-             
-           // Address Address5 = new Address("Big Street", "LargeTown", "BIG", "534 453");
-         //   DataRow line5 = new DataRow("023 - Heart Transplant", "10001", "SOUTHEAST ALBAMA MEDICAL CENTER", Address1, "AL - Dothan", 28, 256000.00, 4678);
-       //     this.data.Add(line5);
-
-     //       Address Address6 = new Address("Big Street", "LargeTown", "BIG", "534 453");
-   //         DataRow line6 = new DataRow("023 - Heart Transplant", "10001", "SOUTHEAST ALBAMA MEDICAL CENTER", Address1, "AL - Dothan", 28, 2570000.00, 2.5);
- //           this.data.Add(line6);
-
-            
- //       }
-
-
-
-
-
+      
        public void populateData(List<DataRow> newList) {
 
 
@@ -57,12 +17,12 @@ namespace AgileCmd
             tempList = newList;
             if (validateList(newList) == true)
             {
-                Console.WriteLine("Recieved Valid List");
+            //    Console.WriteLine("Recieved Valid List");
             }
             else if(validateList(newList) == false)
             {
                 newList = tempList;
-                Console.WriteLine("Recieved InValid List");
+              //  Console.WriteLine("Recieved InValid List");
             }
         }
         
@@ -74,18 +34,10 @@ namespace AgileCmd
             if(listToValidate.Count < 1)
             {
                 return false;
-                Console.WriteLine("Empty List");
+              //  Console.WriteLine("Empty List");
             }
 
-          //  for (int i = 0; i < listToValidate.Count; i++)
-          //  {
-          //      Console.WriteLine(listToValidate[i].GetType().FullName);
-          //      if (!((listToValidate[i].GetType().FullName) == "AgileCmd.DataRow"))
-           //     {
-           //         Console.WriteLine("Not Working");
-           //     return false;
-           //     }
-          //  }
+         
             return true;
         }
 
@@ -109,18 +61,12 @@ namespace AgileCmd
             {
                 if(listToCheck[i].cost < min.cost)
                 {
-                    listToCheck[i].label.Add("Cheapest");
+                 //   listToCheck[i].
                     min = listToCheck[i];
-                    for (int j = 0; j < listToCheck.Count; i++)
-                    {
-                        if (!(listToCheck[i].Equals(listToCheck[j])))
-                        {
-                            listToCheck[j].label.Remove("Cheapest");
-                            break;
-                        }
-                    }
+                  
                 }
             }
+            min.label.Add("Cheapest");
             return min;
         }
 
@@ -132,19 +78,13 @@ namespace AgileCmd
             {
                 if (listToCheck[i].distanceFromUser < min.distanceFromUser)
                 {
-                    listToCheck[i].label.Add("Closest");
+                   
                     min = listToCheck[i];
-                    for (int j = 0; j < listToCheck.Count; j++)
-                    {
-                        if (!(listToCheck[i].Equals(listToCheck[j])))
-                        {
-                            listToCheck[j].label.Remove("Closest");
-                            break;
-                        }
-                    }
+                   
                 }
 
             }
+            min.label.Add("Closest");
             return min;
         }
 
@@ -222,7 +162,7 @@ namespace AgileCmd
                 listToSort[i].score = listToSort[i].costRank * listToSort[i].distanceRank;
                 if(listToSort[i].score > best.score)
                 {
-                    listToSort[i].label.Add("Best");
+                    
                     best = listToSort[i];
                     //label
                 }
@@ -230,20 +170,14 @@ namespace AgileCmd
                 {
                     if (listToSort[i].costRank > best.costRank)
                     {
-                        listToSort[i].label.Add("Best");
+                       
                         best = listToSort[i];
-                        for (int j = 0; j < listToSort.Count; i++)
-                        {
-                            if (!(listToSort[i].Equals(listToSort[j])))
-                            {
-                                listToSort[j].label.Remove("Best");
-                                break;
-                            }
-                        }
+                       
                     }
                 }
             }
-                return best;
+            best.label.Add("Best");
+            return best;
         }
 
         public List<DataRow> setCostRanking(List<DataRow> listToSort)

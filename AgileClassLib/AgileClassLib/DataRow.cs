@@ -36,6 +36,15 @@ namespace AgileCmd
         {
 
         }
+
+        public string CombineLabel() {
+            string retVal = "";
+            foreach (string x in label) {
+                retVal += x;
+                // not finished yet
+            }
+            return retVal;
+        }
         
     }
 }

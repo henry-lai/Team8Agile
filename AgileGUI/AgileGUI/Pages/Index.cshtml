@@ -46,74 +46,180 @@
 </div>
 
 
-<table class="table">
-    @if (IndexModel.UserInput != null)
-    {
-        <thead>
-            <tr>
-                <th></th>
-                <th>
-                    Procedure
-                </th>
-                <th>
-                    Facility Name
-                </th>
-                <th>
-                    Address
-                </th>
-                <th>
-                    Zip
-                </th>
-                <th>
-                    Cost $
-                </th>
-                <th>
-                    Distance
-                </th>
-                <th>
-                    Rating
-                </th>
-            </tr>
-        </thead>
-
-
-        <tbody>
-            @foreach (var item in IndexModel.Data)
-            {
-                <tr>
-                    <td>
-                        @item["Label"]
-                    </td>
-
-                    <td>
-                        @item["Description"]
-                    </td>
-
-                    <td>
-                        @item["Name"]
-                    </td>
-                    <td>
-                        @item["Address"]
-                    </td>
-                    <td>
-                        @item["Zip"]
-                    </td>
-                    <td>
-                        @item["Cost"]
-                    </td>
-                    <td>
-                        @item["Distance"]
-                    </td>
-                    <td>
-                        @item["Score"]
-                    </td>
-
-
-                </tr>
-            }
-        </tbody>
-    }
-</table>
 <p>
 
 </p>
+
+@if (IndexModel.UserInput != null)
+{
+  
+    <div class="tab">
+        <button class="tablinks" onclick="openCity(event, 'Top Hits')" id="defaultOpen">Top Hits</button>
+        <button class="tablinks" onclick="openCity(event, 'Map')">Map</button>
+        <button class="tablinks" onclick="openCity(event, 'All Results')">All Results</button>
+    </div>
+
+    <div id="Top Hits" class="tabcontent">
+
+
+        <table class="table">
+
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>
+                        Procedure
+                    </th>
+                    <th>
+                        Facility Name
+                    </th>
+                    <th>
+                        Address
+                    </th>
+                    
+                    <th>
+                        Cost $
+                    </th>
+                    <th>
+                        Distance
+                    </th>
+                   
+                </tr>
+            </thead>
+
+
+            <tbody>
+                @foreach (var item in IndexModel.RankedResults)
+                {
+                    
+                    <tr>
+                        <td>
+                            @item.CombineLabel()
+                        </td>
+
+                        <td>
+                            @item.definition
+                        </td>
+
+                        <td>
+                            @item.providerName
+                        </td>
+                        <td>
+                            @item.address.DisplayAddress()
+                        </td>
+                        
+                        <td>
+                            @item.cost
+                        </td>
+                        <td>
+                            @item.distanceFromUser
+                        </td>
+                        
+
+
+                    </tr>
+                        
+                    }
+            </tbody>
+            
+        </table>
+
+    </div>
+
+    <div id="Map" class="tabcontent">
+        <h3>Paris</h3>
+        <p>Paris is the capital of France.</p>
+    </div>
+
+    <div id="All Results" class="tabcontent">
+
+
+        <table class="table">
+            @if (IndexModel.UserInput != null)
+            {
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>
+                            Procedure
+                        </th>
+                        <th>
+                            Facility Name
+                        </th>
+                        <th>
+                            Address
+                        </th>
+                        <th>
+                            Zip
+                        </th>
+                        <th>
+                            Cost $
+                        </th>
+                        <th>
+                            Distance
+                        </th>
+                        <th>
+                            Rating
+                        </th>
+                    </tr>
+                </thead>
+
+
+                <tbody>
+                    @foreach (var item in IndexModel.Data)
+                    {
+                        <tr>
+                            <td>
+                                @item["Label"]
+                            </td>
+
+                            <td>
+                                @item["Description"]
+                            </td>
+
+                            <td>
+                                @item["Name"]
+                            </td>
+                            <td>
+                                @item["Address"]
+                            </td>
+                            <td>
+                                @item["Zip"]
+                            </td>
+                            <td>
+                                @item["Cost"]
+                            </td>
+                            <td>
+                                @item["Distance"]
+                            </td>
+                            <td>
+                                @item["Score"]
+                            </td>
+
+
+                        </tr>
+                    }
+                </tbody>
+            }
+        </table>
+
+    </div>
+}
+
+    <script>
+        function openCity(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        document.getElementById("defaultOpen").click();
+
+    </script>

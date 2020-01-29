@@ -46,6 +46,7 @@ namespace AgileGUI.Pages
                 { "Score", "123" }
             };
         public static List<Dictionary<string, string>> Data = new List<Dictionary<string, string>>();
+        public static List<DataRow> RankedResults = new List<DataRow>();
 
 
         public IndexModel(ILogger<IndexModel> logger)
@@ -69,8 +70,18 @@ namespace AgileGUI.Pages
                     UserInput = validate.cleanInput;
                     Searching search = new Searching();
                     List<DataRow> data = search.SearchByCode(UserInput);
+                    Display dis = new Display();
+                    // find cheap
+                    // find closest
+                    // find best 
+
+                    // filter data based on filters on GUI
 
 
+                    RankedResults.Add(dis.findCheapest(data));
+                    RankedResults.Add(dis.findSmallestDistance(data));
+                    dis.setScore(data);
+                    RankedResults.Add(dis.findBest(data));
 
                     foreach (var x in data)
                     {
@@ -78,7 +89,7 @@ namespace AgileGUI.Pages
                         Dictionary<string, string> dict = new Dictionary<string, string>();
 
                         //populates the row
-                        dict.Add("Label", "0");
+                        dict.Add("Label", x.CombineLabel());
                         dict.Add("Description", x.definition);
                         dict.Add("Name", x.providerName);
                         dict.Add("Address", x.address.Street);

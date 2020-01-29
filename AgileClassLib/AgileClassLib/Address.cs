@@ -23,5 +23,9 @@ namespace AgileCmd
         public string City { get => city; set => city = value; }
         public string State { get => state; set => state = value; }
         public string ZipCode { get => zipCode; set => zipCode = value; }
+
+        public string DisplayAddress() {
+            return Street + ", " + city + ", " + ", " + state + ", " + zipCode;
+        }
     }
 }
