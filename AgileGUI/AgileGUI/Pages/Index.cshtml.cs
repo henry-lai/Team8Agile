@@ -59,33 +59,38 @@ namespace AgileGUI.Pages
 
             UserInput = SearchString;
 
-            //runs the input validation method
-            Validate validate = new Validate();
-            if (validate.validateCode(UserInput))
+            if (UserInput != null)
             {
-                UserInput = validate.cleanInput;
-                Searching search = new Searching();
-                List<DataRow> data = search.SearchByCode(UserInput);
 
-               
-                
-                foreach (var x in data)
+                //runs the input validation method
+                Validate validate = new Validate();
+                if (validate.validateCode(UserInput))
                 {
-                    //This dictionary represents a row
-                    Dictionary<string, string> dict = new Dictionary<string, string>();
+                    UserInput = validate.cleanInput;
+                    Searching search = new Searching();
+                    List<DataRow> data = search.SearchByCode(UserInput);
 
-                    //populates the row
-                    dict.Add("Label", "0");
-                    dict.Add("Description", x.definition );
-                    dict.Add("Name", x.providerName);
-                    dict.Add("Address", x.address.Street);
-                    dict.Add("Zip", x.address.ZipCode);
-                    dict.Add("Cost", x.cost.ToString());
-                    dict.Add("Distance", x.distanceFromUser.ToString());
-                    dict.Add("Score", x.score.ToString());
-                    
-                    //Adds the row to the list
-                    Data.Add(dict);
+
+
+                    foreach (var x in data)
+                    {
+                        //This dictionary represents a row
+                        Dictionary<string, string> dict = new Dictionary<string, string>();
+
+                        //populates the row
+                        dict.Add("Label", "0");
+                        dict.Add("Description", x.definition);
+                        dict.Add("Name", x.providerName);
+                        dict.Add("Address", x.address.Street);
+                        dict.Add("Zip", x.address.ZipCode);
+                        dict.Add("Cost", x.cost.ToString());
+                        dict.Add("Distance", x.distanceFromUser.ToString());
+                        dict.Add("Score", x.score.ToString());
+
+                        //Adds the row to the list
+                        Data.Add(dict);
+                    }
+
                 }
 
             }
