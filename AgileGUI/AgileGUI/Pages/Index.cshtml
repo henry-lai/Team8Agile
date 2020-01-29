@@ -19,24 +19,25 @@
     </form>
     <p>Use the filters to narrow the search</p>
     <form>
+ 
         <div class="form-group row">
             <div class="col-xs-2">
                 <p>
                     Use current location
                     <input type="radio" asp-for="UseCurrLocation" value="yes" />
                     or Enter a location
-                    <input type="text" asp-for="LocationString" />
+                    <input type="text" placeholder="221B Baker Street, London" asp-for="LocationString" />
                     Set Cost Range
-                    <input type="text" asp-for="CostFrom" />
+                    <input type="text" placeholder="$" asp-for="CostFrom" />
                     to
-                    <input type="text" asp-for="CostTo" />
+                    <input type="text" placeholder="$" asp-for="CostTo" />
 
                 </p>
             </div>
         </div>
         <p>
             Set Maximum Distance
-            <input type="text" asp-for="DistanceAway" />
+            <input type="text" placeholder=" in  miles"  asp-for="DistanceAway" />
             <input type="submit" value="Apply" />
         </p>
 
