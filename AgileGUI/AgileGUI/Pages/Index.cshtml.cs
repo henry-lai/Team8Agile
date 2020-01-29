@@ -16,7 +16,24 @@ namespace AgileGUI.Pages
         public string SearchString { get; set; }
         // Requires using Microsoft.AspNetCore.Mvc.Rendering;
 
+        [BindProperty(SupportsGet = true)]
+        public string UseCurrLocation { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string LocationString { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string CostFrom { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string CostTo { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string DistanceAway { get; set; }
+
         public static string UserInput = "";
+
+        public static string LocChoice = "";
         
         static Dictionary<string, string> temp = new Dictionary<string, string>() { { "Label", "best" },
                 { "Description", "desc" },
@@ -27,7 +44,7 @@ namespace AgileGUI.Pages
                 { "Distance", "123456" },
                 { "Score", "123" }
             };
-        public static List<Dictionary<string, string>> Data = new List<Dictionary<string, string>>() { temp };
+        public static List<Dictionary<string, string>> Data = new List<Dictionary<string, string>>() { temp,temp,temp };
 
 
         public IndexModel(ILogger<IndexModel> logger)
@@ -39,8 +56,10 @@ namespace AgileGUI.Pages
         public void OnGet()
         {
             
-            UserInput = SearchString;
+                UserInput = SearchString;
+             
             
+            var x = 1;
             // if userInput not empty then
 
             // call
