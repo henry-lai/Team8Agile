@@ -48,6 +48,7 @@ namespace AgileGUI.Pages
         public static List<Dictionary<string, string>> Data = new List<Dictionary<string, string>>();
         public static List<DataRow> RankedResults = new List<DataRow>();
 
+        public static bool DataFound = true;
 
         public IndexModel(ILogger<IndexModel> logger)
         {
@@ -70,36 +71,48 @@ namespace AgileGUI.Pages
                     UserInput = validate.cleanInput;
                     Searching search = new Searching();
                     List<DataRow> data = search.SearchByCode(UserInput);
-                    Display dis = new Display();
-                    // find cheap
-                    // find closest
-                    // find best 
 
-                    // filter data based on filters on GUI
-
-
-                    RankedResults.Add(dis.findCheapest(data));
-                    RankedResults.Add(dis.findSmallestDistance(data));
-                    dis.setScore(data);
-                    RankedResults.Add(dis.findBest(data));
-
-                    foreach (var x in data)
+                    if (data.Count == 0)
                     {
-                        //This dictionary represents a row
-                        Dictionary<string, string> dict = new Dictionary<string, string>();
+                        //error message here
+                        DataFound = false;
 
-                        //populates the row
-                        dict.Add("Label", x.CombineLabel());
-                        dict.Add("Description", x.definition);
-                        dict.Add("Name", x.providerName);
-                        dict.Add("Address", x.address.Street);
-                        dict.Add("Zip", x.address.ZipCode);
-                        dict.Add("Cost", x.cost.ToString());
-                        dict.Add("Distance", x.distanceFromUser.ToString());
-                        dict.Add("Score", x.score.ToString());
+                    }
+                    else
+                    {
+                        DataFound = true;
 
-                        //Adds the row to the list
-                        Data.Add(dict);
+                        Display dis = new Display();
+                        // find cheap
+                        // find closest
+                        // find best 
+
+                        // filter data based on filters on GUI
+
+
+                        RankedResults.Add(dis.findCheapest(data));
+                        RankedResults.Add(dis.findSmallestDistance(data));
+                        dis.setScore(data);
+                        RankedResults.Add(dis.findBest(data));
+
+                        foreach (var x in data)
+                        {
+                            //This dictionary represents a row
+                            Dictionary<string, string> dict = new Dictionary<string, string>();
+
+                            //populates the row
+                            dict.Add("Label", x.CombineLabel());
+                            dict.Add("Description", x.definition);
+                            dict.Add("Name", x.providerName);
+                            dict.Add("Address", x.address.Street);
+                            dict.Add("Zip", x.address.ZipCode);
+                            dict.Add("Cost", x.cost.ToString());
+                            dict.Add("Distance", x.distanceFromUser.ToString());
+                            dict.Add("Score", x.score.ToString());
+
+                            //Adds the row to the list
+                            Data.Add(dict);
+                        }
                     }
 
                 }

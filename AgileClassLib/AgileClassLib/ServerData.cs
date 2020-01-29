@@ -53,7 +53,7 @@ namespace AgileCmd
 
                     using (SqlDataReader oReader = oCommand.ExecuteReader())
                     {
-
+                        
                         while (oReader.Read())
                         {
                             String definition = oReader["drg_definition"].ToString();
