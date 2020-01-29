@@ -1,0 +1,119 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Use the box below to search for and compare your health care options</p>
+
+    <form>
+        <p>
+            <input type="text" asp-for="SearchString" />
+            <input type="submit" value="Search" />
+        </p>
+
+    </form>
+    <p>Use the filters to narrow the search</p>
+    <form>
+        <div class="form-group row">
+            <div class="col-xs-2">
+                <p>
+                    Use current location
+                    <input type="radio" asp-for="UseCurrLocation" value="yes" />
+                    or Enter a location
+                    <input type="text" asp-for="LocationString" />
+                    Set Cost Range
+                    <input type="text" asp-for="CostFrom" />
+                    to
+                    <input type="text" asp-for="CostTo" />
+
+                </p>
+            </div>
+        </div>
+        <p>
+            Set Maximum Distance
+            <input type="text" asp-for="DistanceAway" />
+            <input type="submit" value="Apply" />
+        </p>
+
+    </form>
+
+
+</div>
+
+
+<table class="table">
+    @if (IndexModel.UserInput != null)
+    {
+        <thead>
+            <tr>
+                <th></th>
+                <th>
+                    Procedure
+                </th>
+                <th>
+                    Facility Name
+                </th>
+                <th>
+                    Address
+                </th>
+                <th>
+                    Zip
+                </th>
+                <th>
+                    Cost $
+                </th>
+                <th>
+                    Distance
+                </th>
+                <th>
+                    Rating
+                </th>
+            </tr>
+        </thead>
+
+
+        <tbody>
+            @foreach (var item in IndexModel.Data)
+            {
+                <tr>
+                    <td>
+                        @item["Label"]
+                    </td>
+
+                    <td>
+                        @item["Description"]
+                    </td>
+
+                    <td>
+                        @item["Name"]
+                    </td>
+                    <td>
+                        @item["Address"]
+                    </td>
+                    <td>
+                        @item["Zip"]
+                    </td>
+                    <td>
+                        @item["Cost"]
+                    </td>
+                    <td>
+                        @item["Distance"]
+                    </td>
+                    <td>
+                        @item["Score"]
+                    </td>
+
+
+                </tr>
+            }
+        </tbody>
+    }
+</table>
+<p>
+
+</p>
