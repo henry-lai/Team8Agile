@@ -12,36 +12,57 @@
 
     <form>
         <p>
-            <input type="text" asp-for="SearchString" />
-            <input type="submit" value="Search" />
+            <input type="text" asp-for="SearchString" style="width: 600px;" />
+            <input class="btn btn-primary" type="submit" value="Search" />
+            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Filters
+            </a>
         </p>
 
     </form>
-    <p>Use the filters to narrow the search</p>
-    <form>
- 
-        <div class="form-group row">
-            <div class="col-xs-2">
-                <p>
-                    Use current location
-                    <input type="radio" asp-for="UseCurrLocation" value="yes" />
-                    or Enter a location
-                    <input type="text" placeholder="221B Baker Street, London" asp-for="LocationString" />
-                    Set Cost Range
-                    <input type="text" placeholder="$" asp-for="CostFrom" />
-                    to
-                    <input type="text" placeholder="$" asp-for="CostTo" />
 
-                </p>
+
+
+    <div class="collapse" id="collapseExample">
+
+        <p>Use the filters to narrow the search</p>
+        <form>
+            <div class="form-group row">
+                <div class="container">
+
+                    <p>
+                        <div class="pr-1 pb-2">
+                            Use current location
+                            <input type="radio" asp-for="UseCurrLocation" value="yes" />
+
+                            or Enter a location
+                            <input type="text" placeholder=" 221B Baker Street" LocationString" style="width: 200px;" />
+                        </div>
+                        <div class="pr-1 pb-2">
+
+                            Set Cost Range
+                            <input type="text" placeholder="$" asp-for="CostFrom" style="width: 150px;" />
+                            to
+                            <input type="text" placeholder="$" asp-for="CostTo" style="width: 150px;" />
+                        </div>
+
+                        <div class="pr-1 pb-2">
+
+                            Set Maximum Distance
+                            <input type="text" placeholder="in miles" asp-for="DistanceAway" style="width: 150px;" />
+                            <input class="btn btn-primary" type="submit" value="Apply" />
+                        </div>
+
+
+                    </p>
+
+                </div>
             </div>
-        </div>
-        <p>
-            Set Maximum Distance
-            <input type="text" placeholder=" in  miles"  asp-for="DistanceAway" />
-            <input type="submit" value="Apply" />
-        </p>
 
-    </form>
+        </form>
+    </div>
+
+
 
 
 </div>
@@ -52,105 +73,31 @@
 </p>
 @if (IndexModel.DataFound == false)
 {
-   
-<p>
-    <br />
-    <center>
-        <h2>
-           No Data Found
-        </h2>
-    </center>
-</p>
+    <p>
+        <br />
+        <center>
+            <h2>
+                No Data Found
+            </h2>
+        </center>
+    </p>
 }
-else 
+else
 {
     @if (IndexModel.UserInput != null)
-{
-  
-    <div class="tab">
-        <button class="tablinks" onclick="openCity(event, 'Top Hits')" id="defaultOpen">Top Hits</button>
-        <button class="tablinks" onclick="openCity(event, 'Map')">Map</button>
-        <button class="tablinks" onclick="openCity(event, 'All Results')">All Results</button>
-    </div>
+    {
 
-    <div id="Top Hits" class="tabcontent">
+        <div class="tab">
+            <button class="tablinks" onclick="openCity(event, 'Top Hits')" id="defaultOpen">Top Hits</button>
+            <button class="tablinks" onclick="openCity(event, 'Map')">Map</button>
+            <button class="tablinks" onclick="openCity(event, 'All Results')">All Results</button>
+        </div>
 
-
-        <table class="table">
-
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>
-                        Procedure
-                    </th>
-                    <th>
-                        Facility Name
-                    </th>
-                    <th>
-                        Address
-                    </th>
-                    
-                    <th>
-                        Cost $
-                    </th>
-                    <th>
-                        Distance
-                    </th>
-                   
-                </tr>
-            </thead>
+        <div id="Top Hits" class="tabcontent">
 
 
-            <tbody>
-                @foreach (var item in IndexModel.RankedResults)
-                {
-                    
-                    <tr>
-                        <td>
-                            @item.CombineLabel()
-                        </td>
+            <table class="table">
 
-                        <td>
-                            @item.definition
-                        </td>
-
-                        <td>
-                            @item.providerName
-                        </td>
-                        <td>
-                            @item.address.DisplayAddress()
-                        </td>
-                        
-                        <td>
-                            @item.cost
-                        </td>
-                        <td>
-                            @item.distanceFromUser
-                        </td>
-                        
-
-
-                    </tr>
-                        
-                    }
-            </tbody>
-            
-        </table>
-
-    </div>
-
-    <div id="Map" class="tabcontent">
-        <h3>Paris</h3>
-        <p>Paris is the capital of France.</p>
-    </div>
-
-    <div id="All Results" class="tabcontent">
-
-
-        <table class="table">
-            @if (IndexModel.UserInput != null)
-            {
                 <thead>
                     <tr>
                         <th></th>
@@ -163,77 +110,151 @@ else
                         <th>
                             Address
                         </th>
-                        <th>
-                            Zip
-                        </th>
+
                         <th>
                             Cost $
                         </th>
                         <th>
                             Distance
                         </th>
-                        <th>
-                            Rating
-                        </th>
+
                     </tr>
                 </thead>
 
 
                 <tbody>
-                    @foreach (var item in IndexModel.Data)
+                    @foreach (var item in IndexModel.RankedResults)
                     {
+
                         <tr>
                             <td>
-                                @item["Label"]
+                                @item.CombineLabel()
                             </td>
 
                             <td>
-                                @item["Description"]
+                                @item.definition
                             </td>
 
                             <td>
-                                @item["Name"]
+                                @item.providerName
                             </td>
                             <td>
-                                @item["Address"]
+                                @item.address.DisplayAddress()
+                            </td>
+
+                            <td>
+                                @string.Format("{0:0.00}", item.cost)
                             </td>
                             <td>
-                                @item["Zip"]
+                                @item.distanceFromUser
                             </td>
-                            <td>
-                                @item["Cost"]
-                            </td>
-                            <td>
-                                @item["Distance"]
-                            </td>
-                            <td>
-                                @item["Score"]
-                            </td>
+
 
 
                         </tr>
+
                     }
                 </tbody>
-            }
-        </table>
 
-    </div>
+            </table>
+
+        </div>
+
+        <div id="Map" class="tabcontent">
+            <h3>Paris</h3>
+            <p>Paris is the capital of France.</p>
+        </div>
+
+        <div id="All Results" class="tabcontent">
+
+
+            <table class="table">
+                @if (IndexModel.UserInput != null)
+                {
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>
+                                Procedure
+                            </th>
+                            <th>
+                                Facility Name
+                            </th>
+                            <th>
+                                Address
+                            </th>
+                            <th>
+                                Zip
+                            </th>
+                            <th>
+                                Cost $
+                            </th>
+                            <th>
+                                Distance
+                            </th>
+                            <th>
+                                Rating
+                            </th>
+                        </tr>
+                    </thead>
+
+
+                    <tbody>
+                        @foreach (var item in IndexModel.Data)
+                        {
+                            <tr>
+                                <td>
+                                    @item["Label"]
+                                </td>
+
+                                <td>
+                                    @item["Description"]
+                                </td>
+
+                                <td>
+                                    @item["Name"]
+                                </td>
+                                <td>
+                                    @item["Address"]
+                                </td>
+                                <td>
+                                    @item["Zip"]
+                                </td>
+                                <td>
+                                    @string.Format("{0:0.00}", Convert.ToDouble(item["Cost"]))
+                                </td>
+                                <td>
+                                    @item["Distance"]
+                                </td>
+                                <td>
+                                    @item["Score"]
+                                </td>
+
+
+                            </tr>
+                        }
+                    </tbody>
+                }
+            </table>
+
+        </div>
+    }
 }
-}
-    <script>
-        function openCity(evt, cityName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(cityName).style.display = "block";
-            evt.currentTarget.className += " active";
+
+<script>
+    function openCity(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
         }
-        document.getElementById("defaultOpen").click();
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+    document.getElementById("defaultOpen").click();
 
-    </script>
+</script>
