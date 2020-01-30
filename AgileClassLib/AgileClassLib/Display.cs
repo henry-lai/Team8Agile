@@ -8,6 +8,12 @@ namespace AgileCmd
     public class Display
     {
       
+
+        /*
+         * Input: List of type DataRow
+         * Ouptut: Void
+         * Populates objects list, no longer needed
+         
        public void populateData(List<DataRow> newList) {
 
 
@@ -25,8 +31,14 @@ namespace AgileCmd
               //  Console.WriteLine("Recieved InValid List");
             }
         }
-        
+        */
 
+
+            /*
+             * Input: List of type DataRow
+             * OutPut: true or false
+             * Function: Checks for empty list, if empty return false
+             */
         public bool validateList(List<DataRow> listToValidate)
         {
 
@@ -42,6 +54,11 @@ namespace AgileCmd
         }
 
 
+        /*
+             * Input: List of type DataRow
+             * OutPut: Void
+             * Function: Displays every entry in list to console
+             */
         public void displayFullList(List<DataRow> listToDisplay)
         {
             //populate display list with data given from search
@@ -53,6 +70,12 @@ namespace AgileCmd
 
         }
 
+
+        /*
+             * Input: List of type DataRow
+             * OutPut: DataRow min
+             * Function: Goes through list and finds and returns cheapest entry
+             */
         public DataRow findCheapest(List<DataRow> listToCheck)
         {
             DataRow min = new DataRow();
@@ -70,6 +93,11 @@ namespace AgileCmd
             return min;
         }
 
+
+        /* Input: List of type DataRow
+             * OutPut: DataRow min
+             * Function: Goes through list and finds and returns entry with smallest distance
+             */
         public DataRow findSmallestDistance(List<DataRow> listToCheck)
         {
             DataRow min = new DataRow();
@@ -88,6 +116,12 @@ namespace AgileCmd
             return min;
         }
 
+        /*
+             * Input: List of type DataRow
+             * OutPut: lst of type DataRow
+             * Function: Sorts inputted list by cost ascending
+             */
+
         public List<DataRow> sortCost(List<DataRow> listToSort)
         {
             Console.WriteLine("THIS IS SORTED LIST COST");
@@ -104,6 +138,11 @@ namespace AgileCmd
 
         }
 
+        /*
+             * Input: List of type DataRow
+             * OutPut: lst of type DataRow
+             * Function: Sorts inputted list by Distance ascending
+             */
         public List<DataRow> sortDistance(List<DataRow> listToSort)
         {
             Console.WriteLine("THIS IS SORTED LIST DISTANCE");
@@ -119,6 +158,11 @@ namespace AgileCmd
             return listToSort;
         }
 
+        /*
+             * Input: List of type DataRow
+             * OutPut: lst of type DataRow
+             * Function: Sorts inputted list by score ascending
+             */
         public List<DataRow> sortRank(List<DataRow> listToSort)
         {
 
@@ -136,7 +180,11 @@ namespace AgileCmd
             return listToSort;
         }
 
-
+        /*
+             * Input: List of type DataRow
+             * OutPut: lst of type DataRow
+             * Function: calculates and assigns score to each entry in list
+             */
         public List<DataRow> setScore(List<DataRow> listToSort) {
             listToSort = setDistanceRanking(listToSort);
             listToSort = setCostRanking(listToSort);
@@ -147,7 +195,11 @@ namespace AgileCmd
             return listToSort;
         }
 
-
+        /*
+             * Input: List of type DataRow
+             * OutPut: DataRow best
+             * Function: finds and returns entry with highest score 
+             */
         public DataRow findBest(List<DataRow> listToSort)
         {
             setCostRanking(listToSort);
@@ -180,6 +232,12 @@ namespace AgileCmd
             return best;
         }
 
+
+/*
+             * Input: List of type DataRow
+             * OutPut: lst of type DataRow
+             * Function: calculates and assigns score to each entry in list
+             */
         public List<DataRow> setCostRanking(List<DataRow> listToSort)
         {
             listToSort = sortCost(listToSort);
@@ -191,6 +249,12 @@ namespace AgileCmd
             return listToSort;
         }
 
+
+        /*
+                     * Input: List of type DataRow
+                     * OutPut: lst of type DataRow
+                     * Function: calculates and assigns Distance to each entry in list
+                     */
         public List<DataRow> setDistanceRanking(List<DataRow> listToSort)
         {
             listToSort = sortDistance(listToSort);
@@ -202,12 +266,24 @@ namespace AgileCmd
             return listToSort;
         }
 
+
+        /*
+                     * Input: List of type DataRow
+                     * OutPut: void
+                     * Function: finds closest entry in list and displays to console
+                     */
         public void displayClosest(List<DataRow> listToCheck)
         {
             Console.WriteLine("This is the Closest Entry");
             displayLine(findSmallestDistance(listToCheck));
         }
 
+
+        /*
+                     * Input: List of type DataRow
+                     * OutPut: void
+                     * Function: finds best entry in list and displays to console
+                     */
         public void displayBest(List<DataRow> listToSort)
         {
             Console.WriteLine("This is the Best Entry");
@@ -216,6 +292,12 @@ namespace AgileCmd
 
         }
 
+
+        /*
+                     * Input: List of type DataRow
+                     * OutPut: void
+                     * Function: finds cheapest entry in list and displays to console
+                     */
         public void displayCheapest(List<DataRow> listToShow)
         {
             Console.WriteLine("This is the Cheapest Entry");
@@ -223,6 +305,12 @@ namespace AgileCmd
         }
 
 
+
+        /*
+             * Input:DataRow data
+             * OutPut: void
+             * Function: displays full list
+             */
         private void displayLine(DataRow data)
         {
             Console.Write(data.definition + " - ");
