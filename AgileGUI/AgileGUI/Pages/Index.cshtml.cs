@@ -35,18 +35,9 @@ namespace AgileGUI.Pages
         public static string UserInput = "";
 
         public static string LocChoice = "";
-        
-        static Dictionary<string, string> temp = new Dictionary<string, string>() { { "Label", "best" },
-                { "Description", "desc" },
-                { "Name", "hello" },
-                { "Address", "the street" },
-                { "Zip", "12345" },
-                { "Cost", "12345678" },
-                { "Distance", "123456" },
-                { "Score", "123" }
-            };
-        public static List<Dictionary<string, string>> Data = new List<Dictionary<string, string>>();
-        public static List<DataRow> RankedResults = new List<DataRow>();
+
+        public static List<Dictionary<string, string>> Data; //= new List<Dictionary<string, string>>();
+        public static List<DataRow> RankedResults;  //= new List<DataRow>();
 
         public static bool DataFound = true;
 
@@ -63,7 +54,8 @@ namespace AgileGUI.Pages
 
             if (UserInput != null)
             {
-
+                Data = new List<Dictionary<string, string>>();
+                RankedResults  = new List<DataRow>();
                 //runs the input validation method
                 Validate validate = new Validate();
                 if (validate.validateCode(UserInput))
