@@ -1,5 +1,5 @@
 # Team8Agile
 
-https://github.com/henry-lai/Team8Agile.git
-|
+https://team8agilegui.azurewebsites.net/
+
 --> Link to the website to search health care options
