@@ -77,7 +77,7 @@
         <br />
         <center>
             <h2>
-                No Data Found
+                No Results Found
             </h2>
         </center>
     </p>
@@ -183,18 +183,14 @@ else
                             <th>
                                 Address
                             </th>
-                            <th>
-                                Zip
-                            </th>
+                            
                             <th>
                                 Cost $
                             </th>
                             <th>
                                 Distance
                             </th>
-                            <th>
-                                Rating
-                            </th>
+                          
                         </tr>
                     </thead>
 
@@ -215,20 +211,16 @@ else
                                     @item["Name"]
                                 </td>
                                 <td>
-                                    @item["Address"]
+                                    @item["Address"], @item["City"], @item["State"], @item["Zip"]
                                 </td>
-                                <td>
-                                    @item["Zip"]
-                                </td>
+                                
                                 <td>
                                     @string.Format("{0:0.00}", Convert.ToDouble(item["Cost"]))
                                 </td>
                                 <td>
                                     @item["Distance"]
                                 </td>
-                                <td>
-                                    @item["Score"]
-                                </td>
+                               
 
 
                             </tr>

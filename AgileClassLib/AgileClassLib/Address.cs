@@ -25,7 +25,7 @@ namespace AgileCmd
         public string ZipCode { get => zipCode; set => zipCode = value; }
 
         public string DisplayAddress() {
-            return Street + ", " + city + ", " + ", " + state + ", " + zipCode;
+            return Street + ", " + city + ", " + state + ", " + zipCode;
         }
     }
 }

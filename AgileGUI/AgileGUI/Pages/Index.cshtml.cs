@@ -106,6 +106,8 @@ namespace AgileGUI.Pages
                             dict.Add("Name", x.providerName);
                             dict.Add("Address", x.address.Street);
                             dict.Add("Zip", x.address.ZipCode);
+                            dict.Add("State", x.address.State);
+                            dict.Add("City", x.address.City);
                             dict.Add("Cost", x.cost.ToString());
                             dict.Add("Distance", x.distanceFromUser.ToString());
                             dict.Add("Score", x.score.ToString());
