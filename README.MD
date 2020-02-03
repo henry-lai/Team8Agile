@@ -90,4 +90,21 @@ Review Backlog.
 Actions:
 Update Backlog, Take Client Meetong Notes, Sprint Review
 
+-----------------------------------------------------------------------------------------------------
 
+
+Sprint 2
+
+Day 1:
+Members Present:
+Henry, Matthew, Tony, Topu, Arnav, Afzal
+
+Summary of conversation:
+Created sprint backlog and updated product backlog. Sprint retrospective. Updated GitHub milestones and issues.  Assigned User Stories for sprint 2.
+
+Actions:
+Update Backlog, Start development on Maps, location and distances user stories.  Start SSIS dataload package. 
+
+Issues:
+Tony - Data file format is going to cause issues for SSIS data load, will need to parse/process each data row to remove stray commas
+Henry - potential billing issue for Google Maps
