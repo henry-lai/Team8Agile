@@ -1,3 +1,10 @@
+This is User Story 1.
+User Story #1 As a website visitor, I want to add my location to the website.
+
+
+
+
+
 AC31007/AC51003 Agile Software Engineering - Group Number 8
 
 Group Members:
