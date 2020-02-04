@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BingMapsRESTToolkit" Version="1.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\AgileClassLib\AgileClassLib\AgileClassLib.csproj" />
   </ItemGroup>
 
