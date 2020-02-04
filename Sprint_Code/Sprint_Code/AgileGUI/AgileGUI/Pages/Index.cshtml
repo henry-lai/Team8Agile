@@ -1,0 +1,290 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Use the box below to search for and compare your health care options</p>
+
+    <form>
+        <p>
+            <input type="text" asp-for="SearchString" style="width: 600px;" />
+            <input class="btn btn-primary" type="submit" value="Search" />
+            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Filters
+            </a>
+        </p>
+
+    </form>
+
+
+
+    <div class="collapse" id="collapseExample">
+
+        <p>Use the filters to narrow the search</p>
+        <form>
+            <div class="form-group row">
+                <div class="container">
+
+                    <p>
+                        <div class="pr-1 pb-2">
+                            Use current location
+                            <input type="radio" asp-for="UseCurrLocation" value="yes" />
+
+                            or Enter a location
+                            <input type="text" placeholder=" 221B Baker Street" LocationString" style="width: 200px;" />
+                        </div>
+                        <div class="pr-1 pb-2">
+
+                            Set Cost Range
+                            <input type="text" placeholder="$" asp-for="CostFrom" style="width: 150px;" />
+                            to
+                            <input type="text" placeholder="$" asp-for="CostTo" style="width: 150px;" />
+                        </div>
+
+                        <div class="pr-1 pb-2">
+
+                            Set Maximum Distance
+                            <input type="text" placeholder="in miles" asp-for="DistanceAway" style="width: 150px;" />
+                            <input class="btn btn-primary" type="submit" value="Apply" />
+                        </div>
+                    </p>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+<p>
+
+</p>
+@if (IndexModel.DataFound == false)
+{
+<p>
+    <br />
+    <center>
+        <h2>
+            No Results Found
+        </h2>
+    </center>
+</p>
+}
+else
+{
+@if (IndexModel.UserInput != null)
+    {
+
+<div class="tab">
+    <button class="tablinks" onclick="openCity(event, 'Top Hits')" id="defaultOpen">Top Hits</button>
+    <button class="tablinks" onclick="openCity(event, 'Map')">Map</button>
+    <button class="tablinks" onclick="openCity(event, 'All Results')">All Results</button>
+</div>
+
+<div id="Top Hits" class="tabcontent">
+
+
+    <table class="table">
+
+        <thead>
+            <tr>
+                <th></th>
+                <th>
+                    Procedure
+                </th>
+                <th>
+                    Facility Name
+                </th>
+                <th>
+                    Address
+                </th>
+
+                <th>
+                    Cost $
+                </th>
+                <th>
+                    Distance
+                </th>
+
+            </tr>
+        </thead>
+
+
+        <tbody>
+            @foreach (var item in IndexModel.RankedResults)
+                    {
+
+            <tr>
+                <td>
+                    @item.CombineLabel()
+                </td>
+
+                <td>
+                    @item.definition
+                </td>
+
+                <td>
+                    @item.providerName
+                </td>
+                <td>
+                    @item.address.DisplayAddress()
+                </td>
+
+                <td>
+                    @string.Format("{0:0.00}", item.cost)
+                </td>
+                <td>
+                    @item.distanceFromUser
+                </td>
+
+
+
+            </tr>
+
+                    }
+        </tbody>
+
+    </table>
+
+</div>
+
+<div id="Map" class="tabcontent">
+
+    <div id="map" style="width: 57.5%; height: 50%; position: absolute;"></div>
+    <script>
+        var map; infoWindow;
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: -34.397, lng: 150.644 },
+                zoom: 6
+            });
+
+            infoWindow = new google.maps.InfoWindow;
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var pos =
+                    {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+
+                    infoWindow.setPosition(pos);
+                    infoWindow.setContent('Location found.');
+                    infoWindow.open(map);
+                    map.setCenter(pos);
+                },
+                    function () {
+                        handleLocationError(true, infoWindow, map.getCenter());
+                    });
+            } else {
+                //handle location error
+                handleLocationError(false, infoWindow, map.getCenter());
+            }
+        }
+
+
+
+        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+            infoWindow.setPosition(pos);
+            infoWindow.setContent(browserHasGeolocation ?
+                'Error: The Geolocation service failed.' :
+                'Error: Your browser doesn\'t support geolocation.');
+            infoWindow.open(map);
+        }
+    </script>
+
+</div>
+
+
+
+<div id="All Results" class="tabcontent">
+
+
+    <table class="table">
+        @if (IndexModel.UserInput != null)
+                {
+        <thead>
+            <tr>
+                <th></th>
+                <th>
+                    Procedure
+                </th>
+                <th>
+                    Facility Name
+                </th>
+                <th>
+                    Address
+                </th>
+
+                <th>
+                    Cost $
+                </th>
+                <th>
+                    Distance
+                </th>
+
+            </tr>
+        </thead>
+
+
+        <tbody>
+            @foreach (var item in IndexModel.Data)
+                        {
+            <tr>
+                <td>
+                    @item["Label"]
+                </td>
+
+                <td>
+                    @item["Description"]
+                </td>
+
+                <td>
+                    @item["Name"]
+                </td>
+                <td>
+                    @item["Address"], @item["City"], @item["State"], @item["Zip"]
+                </td>
+
+                <td>
+                    @string.Format("{0:0.00}", Convert.ToDouble(item["Cost"]))
+                </td>
+                <td>
+                    @item["Distance"]
+                </td>
+
+
+
+            </tr>
+                        }
+        </tbody>
+                }
+    </table>
+
+</div>
+    }
+}
+
+<script>
+    function openCity(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+    document.getElementById("defaultOpen").click();
+
+</script>
