@@ -108,3 +108,20 @@ Update Backlog, Start development on Maps, location and distances user stories. 
 Issues:
 Tony - Data file format is going to cause issues for SSIS data load, will need to parse/process each data row to remove stray commas
 Henry - potential billing issue for Google Maps
+
+-----------------------------------------------------------------------------------------------------
+
+Day 2:
+Members Present:
+Henry, Matthew, Tony, Topu, Arnav, Afzal
+
+Summary of conversation:
+Updated backlogs.  Updated GitHub milestones and issues.  Assigned User Stories for sprint 2. Google Maps Api can detect current location and put pins on map. Created two search bars.  Completed SSIS dataload. Worked on Test plan. Discussed layout of main page.   
+
+Actions:
+Updated Backlog, continue development on Maps, location and distances user stories. Start on filters. Reformat the results layout. 
+
+Issues:
+Matthew, Tony, Afzal - issue with double entry in boxes, solved
+Henry - billing issue for Google Maps, looking at switching to bing instead
+All - GitHub issues, it wasnt updating the repo with a new version of files. 
