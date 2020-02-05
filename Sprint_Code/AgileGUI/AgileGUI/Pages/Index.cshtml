@@ -155,49 +155,22 @@ else
 
         <div id="Map" class="tabcontent">
 
-            <div id="map" style="width: 57.5%; height: 50%; position: absolute;"></div>
-            <script>
-                /*var map; infoWindow;
-                function initMap() {
-                    map = new google.maps.Map(document.getElementById('map'), {
-                        center: { lat: -34.397, lng: 150.644 },
-                        zoom: 6
-                    });*/
             <div id="myMap" style="width: 57.5%; height: 50%; position: absolute;"></div>
-            <script type='text/javascript'>
-
+            <script type="text/javascript">
                 function loadMapScenario() {
                     var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {});
-
-                    /*infoWindow = new google.maps.InfoWindow;
-
-                    if (navigator.geolocation) {
-                        navigator.geolocation.getCurrentPosition(function (position) {
-                            var pos =
-                            {
-                                lat: position.coords.latitude,
-                                lng: position.coords.longitude
-                            };
                     navigator.geolocation.getCurrentPosition(function (position) {
                         var loc = new Microsoft.Maps.Location(
                             position.coords.latitude,
                             position.coords.longitude);
+                        //Add a pushpin at the user's location.
+                        var pin = new Microsoft.Maps.Pushpin(loc);
+                        map.entities.push(pin);
 
-                            infoWindow.setPosition(pos);
-                            infoWindow.setContent('Location found.');
-                            infoWindow.open(map);
-                            map.setCenter(pos);
-                        },
-                            function () {
-                                handleLocationError(true, infoWindow, map.getCenter());
-                            });
-                    } else {
-                        //handle location error
-                        handleLocationError(false, infoWindow, map.getCenter());
-                    }
-                }*/
-
-
+                        map.setView({ mapTypeId: Microsoft.Maps.MapTypeId.road, center: loc, zoom: 15 });
+                    });
+                }
+                
 
                 function showLatLon() {
                     map.entities.clear();
@@ -218,22 +191,6 @@ else
                     map.entities.push(pushpin);
                     showInfoBox(pushpin);
 
-                }
-
-                        //Add a pushpin at the user's location.
-                        var pin = new Microsoft.Maps.Pushpin(loc);
-                        map.entities.push(pin);
-
-                        map.setView({ mapTypeId: Microsoft.Maps.MapTypeId.road, center: loc, zoom: 15 });
-
-                /*function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-                    infoWindow.setPosition(pos);
-                    infoWindow.setContent(browserHasGeolocation ?
-                        'Error: The Geolocation service failed.' :
-                        'Error: Your browser doesn\'t support geolocation.');
-                    infoWindow.open(map);
-                }*/
-                    });
                 }
             </script>
 

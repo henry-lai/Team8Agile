@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AgileCmd;
+using LocationsAndRouting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -16,6 +17,9 @@ namespace AgileGUI.Pages
         [BindProperty(SupportsGet = true)]
         public string SearchString { get; set; }
         // Requires using Microsoft.AspNetCore.Mvc.Rendering;
+
+        [BindProperty(SupportsGet = true)]
+        public string UserLocation { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public string UseCurrLocation { get; set; }
@@ -34,7 +38,7 @@ namespace AgileGUI.Pages
 
         public static string UserInput = "";
 
-        public static string UseCurrLocation = "";
+        public static string useCurrLocation = "";
 
         //public static string LocChoice = "";
 
@@ -49,7 +53,7 @@ namespace AgileGUI.Pages
             
         }
 
-        public void OnGet()
+        public async void OnGet()
         {
 
             UserInput = SearchString;
@@ -112,7 +116,15 @@ namespace AgileGUI.Pages
                     }
 
                 }
-
+                useCurrLocation = UserLocation;
+                if (useCurrLocation.Length == 0)
+                {
+                    Console.WriteLine("Please enter location");
+                }
+                else
+                {
+                    await BingMap.mapInit(UseCurrLocation);
+                }
             }
             // if userInput not empty then
 
@@ -125,15 +137,7 @@ namespace AgileGUI.Pages
                 // calc closest
                 // calc cheapest
                 // display results
-            UseCurrLocation = UserLocation;
-            if(UseCurrLocation.Length == 0)
-            {
-                Console.WriteLine("Please enter location");
-            }
-            else
-            {
-                BingMap.mapInit(UseCurrLocation);
-            }
+            
 
 
 
