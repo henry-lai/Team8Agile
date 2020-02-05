@@ -6,6 +6,7 @@ using AgileCmd;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using LocationsAndRouting;
 
 namespace AgileGUI.Pages
 {
@@ -20,6 +21,9 @@ namespace AgileGUI.Pages
         public string SearchStringDesc { get; set; }
 
         // Requires using Microsoft.AspNetCore.Mvc.Rendering;
+
+        [BindProperty(SupportsGet = true)]
+        public string UserLocation { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public string UseCurrLocation { get; set; }
@@ -37,10 +41,14 @@ namespace AgileGUI.Pages
         public static string UserInput = "";
         public static double MaxCost { get; set; }
 
+        public static string useCurrLocation = "";
+
+
+
         public static bool TwoBoxes = false;
         public static bool ValidEntry = false;
 
-        public static string LocChoice = "";
+        //public static string LocChoice = "";
 
         public static List<Dictionary<string, string>> Data; //= new List<Dictionary<string, string>>();
         public static List<DataRow> RankedResults;  //= new List<DataRow>();
@@ -55,11 +63,12 @@ namespace AgileGUI.Pages
 
         }
 
-        public void OnGet()
+        public async void OnGet()
         {
 
             UserInput = null;
             Filters = new Dictionary<string, double>();
+            UseCurrLocation = UserLocation;
 
             if (CostTo != null)
             {
@@ -148,6 +157,17 @@ namespace AgileGUI.Pages
 
                 }
 
+                if (UseCurrLocation.Length == 0)
+                {
+                    Console.WriteLine("Please enter location");
+                    // change to put message on screeen and don't search
+
+                }
+                else
+                {
+                    await BingMap.mapInit(UseCurrLocation);
+
+                }
             }
             else
             {

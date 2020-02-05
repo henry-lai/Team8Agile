@@ -8,7 +8,7 @@ namespace AgileCmd
     public class ServerData
     {
         public List<DataRow> data { get; set; }
-        //  List<DataRow> data;
+      //  List<DataRow> data;
         string connectionString = null;
         SqlConnection conn;
 
@@ -25,8 +25,7 @@ namespace AgileCmd
                 "Connection Timeout = 30;";
         }
 
-        public List<DataRow> ReadDatabase(string searchItem, Dictionary<string, double> Filters)
-        {
+        public List<DataRow> ReadDatabase(string searchItem, Dictionary<string,double> Filters) {
             conn = new SqlConnection(connectionString);
 
             try
@@ -54,11 +53,10 @@ namespace AgileCmd
 
                     using (SqlDataReader oReader = oCommand.ExecuteReader())
                     {
-
+                        
                         while (oReader.Read())
                         {
-                            if (Convert.ToDouble(oReader["average_total_payments"].ToString()) <= Filters["MaxCost"])
-                            {
+                            if (Convert.ToDouble(oReader["average_total_payments"].ToString()) <= Filters["MaxCost"]) {
                                 String definition = oReader["drg_definition"].ToString();
                                 String providerID = oReader["provider_id"].ToString();
                                 String providerName = oReader["provider_name"].ToString();

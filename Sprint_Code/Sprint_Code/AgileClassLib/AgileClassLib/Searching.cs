@@ -5,8 +5,8 @@ using System.Linq;
 namespace AgileCmd
 {
     public class Searching
-    {
-        public List<DataRow> SearchByCode(String searchTerm, Dictionary<string, double> Filters)  // remove passed in data list 
+    {   
+        public List<DataRow> SearchByCode(String searchTerm, Dictionary<string,double> Filters)  // remove passed in data list 
         {
             List<DataRow> searchResult = new List<DataRow>();
             ServerData server = new ServerData();
