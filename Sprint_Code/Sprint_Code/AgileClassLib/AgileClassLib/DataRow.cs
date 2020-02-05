@@ -18,6 +18,9 @@ namespace AgileCmd
         public int distanceRank { get; set; }
         public int score { get; set; }
         public List<string> label = new  List<string>();
+        private Address add;
+        private int discharge;
+        private Random random;
 
         public DataRow(string definition, string providerID, string providerName, Address address, string reference, long totalDischarge, double cost, double distanceFromUser)
         {
@@ -35,6 +38,18 @@ namespace AgileCmd
         public DataRow()
         {
 
+        }
+
+        public DataRow(string definition, string providerID, string providerName, Address add, string reference, int discharge, double cost, Random random)
+        {
+            this.definition = definition;
+            this.providerID = providerID;
+            this.providerName = providerName;
+            this.add = add;
+            this.reference = reference;
+            this.discharge = discharge;
+            this.cost = cost;
+            this.random = random;
         }
 
         public string CombineLabel() {

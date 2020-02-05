@@ -109,6 +109,7 @@ namespace AgileGUI.Pages
                     Searching search = new Searching();
                     List<DataRow> data = search.SearchByCode(UserInput, Filters);
 
+
                     if (data.Count == 0)
                     {
                         //error message here
