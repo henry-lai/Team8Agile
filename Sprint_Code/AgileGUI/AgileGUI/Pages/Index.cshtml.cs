@@ -116,6 +116,8 @@ namespace AgileGUI.Pages
                     }
 
                 }
+
+                // looking for user location
                 useCurrLocation = UserLocation;
                 if (useCurrLocation.Length == 0)
                 {
