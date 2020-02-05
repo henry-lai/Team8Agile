@@ -71,6 +71,18 @@ namespace AgileGUI.Pages
             }
             Filters.Add("MaxCost", MaxCost);
 
+            //--------------------------------------------------------------------
+            if (DistanceAway != null)
+            {
+                MaxDistance = Convert.ToDouble(DistanceAway);
+            }
+            else
+            {
+                MaxDistance = Double.MaxValue;
+            }
+            Filters.Add("MaxDistance", MaxDistance);
+            //--------------------------------------------------------------------
+
             if ((SearchString != null) && (SearchStringDesc != null))
             {
                 TwoBoxes = true;
@@ -99,6 +111,7 @@ namespace AgileGUI.Pages
                     UserInput = validate.cleanInput;
                     Searching search = new Searching();
                     List<DataRow> data = search.SearchByCode(UserInput, Filters);
+
 
                     if (data.Count == 0)
                     {

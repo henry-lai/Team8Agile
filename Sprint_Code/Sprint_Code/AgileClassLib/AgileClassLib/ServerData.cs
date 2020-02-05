@@ -71,11 +71,21 @@ namespace AgileCmd
                                 Double cost = Convert.ToDouble(oReader["average_total_payments"].ToString());
 
                                 Address add = new Address(street, city, state, zip);
-                                DataRow dt = new DataRow(definition, providerID, providerName, add, reference, discharge, cost, 0);
+                                //calculate dynamic distance for data entries here
+                                //-------------------------------------------------------------------------------------
+                                Random random = new Random(Convert.ToInt32(DateTimeOffset.Now.ToUnixTimeMilliseconds()));
+                                DataRow dt = new DataRow(definition, providerID, providerName, add, reference, discharge, cost, (random.Next(1,2000)));
+                                //--------------------------------------------------------------------------------------
 
                                 data.Add(dt);
                             }
+
                         }
+
+
+                        // distance meth9od
+
+                        //
                     }
 
                 }
