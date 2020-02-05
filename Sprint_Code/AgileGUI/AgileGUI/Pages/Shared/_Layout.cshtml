@@ -87,11 +87,10 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBebIyqUiTveAUbFVtBwwWLUY9ItRoCJ0M&callback=initMap">
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
 
+    <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=Ap6xFfW3nnzt3n5RTm4n9XNUTlcJIb6G22QyLDzZC_jueYcos8xF2Yyuh_vopulT&callback=loadMapScenario' async defer></script>
 
     @RenderSection("Scripts", required: false)
 </body>
