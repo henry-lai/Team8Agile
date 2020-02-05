@@ -36,7 +36,7 @@
                             <input type="radio" asp-for="UseCurrLocation" value="yes" />
 
                             or Enter a location
-                            <input type="text" placeholder=" 221B Baker Street" LocationString style="width: 200px;" />
+                            <input type="text" placeholder=" 221B Baker Street" asp-for="UserLocation" LocationString style="width: 200px;" />
                         </div>
                         <div class="pr-1 pb-2">
 
@@ -77,9 +77,9 @@
 }
 else
 {
-    @if (IndexModel.UserInput != null)
+    if (IndexModel.UserInput != null)
     {
-
+        <script>showLatLon();</script>
         <div class="tab">
             <button class="tablinks" onclick="openCity(event, 'Top Hits')" id="defaultOpen">Top Hits</button>
             <button class="tablinks" onclick="openCity(event, 'Map')">Map</button>
@@ -157,15 +157,15 @@ else
 
             <div id="map" style="width: 57.5%; height: 50%; position: absolute;"></div>
             <script>
-                var map; infoWindow;
+                /*var map; infoWindow;
                 function initMap() {
                     map = new google.maps.Map(document.getElementById('map'), {
                         center: { lat: -34.397, lng: 150.644 },
                         zoom: 6
-                    });
+                    });*/
 
 
-                    infoWindow = new google.maps.InfoWindow;
+                    /*infoWindow = new google.maps.InfoWindow;
 
                     if (navigator.geolocation) {
                         navigator.geolocation.getCurrentPosition(function (position) {
@@ -187,20 +187,40 @@ else
                         //handle location error
                         handleLocationError(false, infoWindow, map.getCenter());
                     }
+                }*/
+
+
+
+                function showLatLon() {
+                    map.entities.clear();
+
+                    var lat = document.getElementById(BingMap.Lat).value;
+                    var lon = document.getElementById(BingMap.Lng).value;
+
+                    if (isLatLonValid(lat, lon) == false) {
+                        alert("Please enter valid location.");
+                        return false;
+                    }
+
+                    var latlonLocation = new Microsoft.Maps.Location(lat, lon);
+                    map.setView({ zoon: 12, center: latlonLocation });
+                    var pushpin = createPushpin(latlonLocation, "1");
+                    pushpin.geoname = "Manually entered location";
+
+                    map.entities.push(pushpin);
+                    showInfoBox(pushpin);
+
                 }
 
 
 
-
-
-
-                function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+                /*function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                     infoWindow.setPosition(pos);
                     infoWindow.setContent(browserHasGeolocation ?
                         'Error: The Geolocation service failed.' :
                         'Error: Your browser doesn\'t support geolocation.');
                     infoWindow.open(map);
-                }
+                }*/
             </script>
             
 

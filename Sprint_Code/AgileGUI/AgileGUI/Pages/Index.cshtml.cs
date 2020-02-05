@@ -34,7 +34,9 @@ namespace AgileGUI.Pages
 
         public static string UserInput = "";
 
-        public static string LocChoice = "";
+        public static string UseCurrLocation = "";
+
+        //public static string LocChoice = "";
 
         public static List<Dictionary<string, string>> Data; //= new List<Dictionary<string, string>>();
         public static List<DataRow> RankedResults;  //= new List<DataRow>();
@@ -123,6 +125,15 @@ namespace AgileGUI.Pages
                 // calc closest
                 // calc cheapest
                 // display results
+            UseCurrLocation = UserLocation;
+            if(UseCurrLocation.Length == 0)
+            {
+                Console.WriteLine("Please enter location");
+            }
+            else
+            {
+                BingMap.mapInit(UseCurrLocation);
+            }
 
 
 

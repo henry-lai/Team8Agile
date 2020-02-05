@@ -18,7 +18,7 @@ namespace LocationsAndRouting
 
         public static async System.Threading.Tasks.Task mapInit(String query)
         {
-            Console.WriteLine("Hello World!");
+            //Console.WriteLine("Hello World!");
 
             //Create a request.
             var request = new GeocodeRequest()
@@ -51,6 +51,8 @@ namespace LocationsAndRouting
             }
 
         }
+
+        
 
         public void Main(String[] args)
         {
