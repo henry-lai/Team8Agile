@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgileGUI", "AgileGUI\AgileGUI.csproj", "{A14325A0-1B6A-4421-9F56-25D44647A17B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgileClassLib", "..\AgileClassLib\AgileClassLib\AgileClassLib.csproj", "{F1727FAA-D6E9-42F3-B7C6-1350BD166CCC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A14325A0-1B6A-4421-9F56-25D44647A17B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A14325A0-1B6A-4421-9F56-25D44647A17B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A14325A0-1B6A-4421-9F56-25D44647A17B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A14325A0-1B6A-4421-9F56-25D44647A17B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1727FAA-D6E9-42F3-B7C6-1350BD166CCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1727FAA-D6E9-42F3-B7C6-1350BD166CCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1727FAA-D6E9-42F3-B7C6-1350BD166CCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1727FAA-D6E9-42F3-B7C6-1350BD166CCC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A503F581-FB91-4C72-96D9-186DC2A1A1F9}
+	EndGlobalSection
+EndGlobal
