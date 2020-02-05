@@ -3,17 +3,17 @@ AC31007/AC51003 Agile Software Engineering - Group Number 8
 
 Group Members:
 
-â€¢	Henry Lai: 170010246
+•	Henry Lai: 170010246
 
-â€¢	Matthew Aston: 170020225  
+•	Matthew Aston: 170020225  
 
-â€¢	Afzal Miah: 170010026
+•	Afzal Miah: 170010026
 
-â€¢	Fayzuddin Topu: 170023859
+•	Fayzuddin Topu: 170023859
 
-â€¢	Arnav Dhawan: 180024498
+•	Arnav Dhawan: 180024498
 
-â€¢	Anthony Sweeney: 2399626
+•	Anthony Sweeney: 2399626
 
   
 

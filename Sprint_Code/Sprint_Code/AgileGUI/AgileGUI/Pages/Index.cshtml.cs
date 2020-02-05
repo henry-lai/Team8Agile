@@ -6,6 +6,7 @@ using AgileCmd;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using LocationsAndRouting;
 
 namespace AgileGUI.Pages
 {
@@ -22,13 +23,14 @@ namespace AgileGUI.Pages
         // Requires using Microsoft.AspNetCore.Mvc.Rendering;
 
         [BindProperty(SupportsGet = true)]
+        public string UserLocation { get; set; }
+
+        [BindProperty(SupportsGet = true)]
         public string UseCurrLocation { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public string LocationString { get; set; }
 
-        [BindProperty(SupportsGet = true)]
-        public string CostFrom { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public string CostTo { get; set; }
@@ -37,16 +39,23 @@ namespace AgileGUI.Pages
         public string DistanceAway { get; set; }
 
         public static string UserInput = "";
+        public static double MaxCost { get; set; }
+
+        public static string useCurrLocation = "";
+
+
 
         public static bool TwoBoxes = false;
         public static bool ValidEntry = false;
 
-        public static string LocChoice = "";
+        //public static string LocChoice = "";
 
         public static List<Dictionary<string, string>> Data; //= new List<Dictionary<string, string>>();
         public static List<DataRow> RankedResults;  //= new List<DataRow>();
 
         public static bool DataFound = true;
+
+        public Dictionary<string, double> Filters { get; set; }
 
         public IndexModel(ILogger<IndexModel> logger)
         {
@@ -54,10 +63,22 @@ namespace AgileGUI.Pages
 
         }
 
-        public void OnGet()
+        public async void OnGet()
         {
 
             UserInput = null;
+            Filters = new Dictionary<string, double>();
+            UseCurrLocation = UserLocation;
+
+            if (CostTo != null)
+            {
+                MaxCost = Convert.ToDouble(CostTo);
+            }
+            else
+            {
+                MaxCost = Double.MaxValue;
+            }
+            Filters.Add("MaxCost", MaxCost);
 
             if ((SearchString != null) && (SearchStringDesc != null))
             {
@@ -65,13 +86,13 @@ namespace AgileGUI.Pages
             }
             if ((SearchString == null) && ValidateEntry(SearchStringDesc, "DESC"))
             {
-                
+
                 UserInput = SearchStringDesc;
                 TwoBoxes = false;
             }
             else if ((SearchStringDesc == null) && ValidateEntry(SearchString, "CODE"))
             {
-                
+
                 UserInput = SearchString;
                 TwoBoxes = false;
             }
@@ -86,7 +107,8 @@ namespace AgileGUI.Pages
                 {
                     UserInput = validate.cleanInput;
                     Searching search = new Searching();
-                    List<DataRow> data = search.SearchByCode(UserInput);
+                    List<DataRow> data = search.SearchByCode(UserInput, Filters);
+
 
                     if (data.Count == 0)
                     {
@@ -96,6 +118,7 @@ namespace AgileGUI.Pages
                     }
                     else
                     {
+
                         DataFound = true;
 
                         Display dis = new Display();
@@ -135,6 +158,17 @@ namespace AgileGUI.Pages
 
                 }
 
+                if (UseCurrLocation.Length == 0)
+                {
+                    Console.WriteLine("Please enter location");
+                    // change to put message on screeen and don't search
+
+                }
+                else
+                {
+                    await BingMap.mapInit(UseCurrLocation);
+
+                }
             }
             else
             {
@@ -148,7 +182,7 @@ namespace AgileGUI.Pages
             bool result = true;
             if (entry != null)
             {
-                
+
                 switch (EntryType)
                 {
                     case "CODE":
@@ -169,7 +203,7 @@ namespace AgileGUI.Pages
             }
             ValidEntry = result;
             return result;
-            
+
         }
 
     }

@@ -25,7 +25,7 @@ namespace AgileCmd
                 "Connection Timeout = 30;";
         }
 
-        public List<DataRow> ReadDatabase(string searchItem) {
+        public List<DataRow> ReadDatabase(string searchItem, Dictionary<string,double> Filters) {
             conn = new SqlConnection(connectionString);
 
             try
@@ -56,22 +56,32 @@ namespace AgileCmd
                         
                         while (oReader.Read())
                         {
-                            String definition = oReader["drg_definition"].ToString();
-                            String providerID = oReader["provider_id"].ToString();
-                            String providerName = oReader["provider_name"].ToString();
-                            String street = oReader["provider_street_address"].ToString();
-                            String city = oReader["provider_city"].ToString();
-                            String state = oReader["provider_state"].ToString();
-                            String zip = oReader["provider_zip"].ToString();
-                            String reference = oReader["hospital_referral_region"].ToString();
-                            int discharge = Convert.ToInt32(oReader["total_discharges"].ToString());
-                            Double cost = Convert.ToDouble(oReader["average_total_payments"].ToString());
+                            if (Convert.ToDouble(oReader["average_total_payments"].ToString()) <= Filters["MaxCost"]) {
+                                String definition = oReader["drg_definition"].ToString();
+                                String providerID = oReader["provider_id"].ToString();
+                                String providerName = oReader["provider_name"].ToString();
+                                String street = oReader["provider_street_address"].ToString();
+                                String city = oReader["provider_city"].ToString();
+                                String state = oReader["provider_state"].ToString();
+                                String zip = oReader["provider_zip"].ToString();
+                                String reference = oReader["hospital_referral_region"].ToString();
+                                int discharge = Convert.ToInt32(oReader["total_discharges"].ToString());
+                                Double cost = Convert.ToDouble(oReader["average_total_payments"].ToString());
 
-                            Address add = new Address(street, city, state, zip);
-                            DataRow dt = new DataRow(definition, providerID, providerName, add, reference, discharge, cost,0);
+                                Address add = new Address(street, city, state, zip);
 
-                            data.Add(dt);
+                                DataRow dt = new DataRow(definition, providerID, providerName, add, reference, discharge, cost, 0);
+
+
+                                data.Add(dt);
+                            }
+
                         }
+
+
+                        // distance meth9od
+
+                        //
                     }
 
                 }
