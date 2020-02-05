@@ -71,18 +71,6 @@ namespace AgileGUI.Pages
             }
             Filters.Add("MaxCost", MaxCost);
 
-            //--------------------------------------------------------------------
-            if (DistanceAway != null)
-            {
-                MaxDistance = Convert.ToDouble(DistanceAway);
-            }
-            else
-            {
-                MaxDistance = Double.MaxValue;
-            }
-            Filters.Add("MaxDistance", MaxDistance);
-            //--------------------------------------------------------------------
-
             if ((SearchString != null) && (SearchStringDesc != null))
             {
                 TwoBoxes = true;
