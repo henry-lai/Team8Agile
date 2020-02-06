@@ -1,6 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Sprint_Code",
+    "\\Sprint_Code\\Sprint_Code",
+    "\\Sprint_Code\\Sprint_Code\\AgileClassLib",
+    "\\Sprint_Code\\Sprint_Code\\AgileGUI"
   ],
+  "SelectedNode": "\\Sprint_Code\\Sprint_Code\\AgileClassLib\\AgileClassLib.sln",
   "PreviewInSolutionExplorer": false
 }

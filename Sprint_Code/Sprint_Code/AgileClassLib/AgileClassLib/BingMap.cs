@@ -52,7 +52,7 @@ namespace LocationsAndRouting
 
 
         }
-        public double HaversineDistance(LatLng pos1, LatLng pos2, DistanceUnit unit)
+        public double HaversineDistance(LatLng pos1, LatLng pos2)
         {
             double R = 3960;
             var lat = ToRadians((pos2.Latitude - pos1.Latitude));
@@ -68,7 +68,7 @@ namespace LocationsAndRouting
         }
 
 
-        public enum DistanceUnit { Miles, Kilometers };
+        //public enum DistanceUnit { Miles, Kilometers };
 
         public static double ToRadians(double val)
         {

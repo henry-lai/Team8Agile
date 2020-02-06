@@ -38,5 +38,20 @@ namespace TestClass
 
             StringAssert.Contains("56.46126937866211 : -2.967600107192993", expected);
         }
+
+        [Test]
+        public void HaversineDistanceTest()
+        {
+            BingMap m = new BingMap();
+            //Dundee 56.46913, -2.97489
+            //Glasgow 55.86515, -4.25763
+            LatLng dundee = new LatLng(56.46913, -2.97489);
+            LatLng glasgow = new LatLng(55.86515, -4.25763);
+
+
+            //Assert.AreEqual(m.HaversineDistance(dundee, glasgow), 64.81);
+
+            Assert.That(m.HaversineDistance(dundee, glasgow), Is.EqualTo(64).Within(5.0));
+        }
     }
 }
