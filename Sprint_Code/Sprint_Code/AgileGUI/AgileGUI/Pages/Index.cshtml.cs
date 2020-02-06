@@ -111,6 +111,7 @@ namespace AgileGUI.Pages
 
             if ((UserInput != null) && (!TwoBoxes))
             {
+                
                 Data = new List<Dictionary<string, string>>();
                 RankedResults = new List<DataRow>();
                 //runs the input validation method
