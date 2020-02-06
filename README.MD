@@ -134,10 +134,10 @@ Members Present:
 Henry, Matthew, Tony, Topu, Arnav, Afzal
 
 Summary of conversation:
-Updated backlogs. Updated GitHub milestones and issues. Finished cost filter code and ran tests for displays. Havershin formula to calculate distances between 2 coordinates done to calculate distances. 
+Updated backlogs. Updated GitHub milestones and issues. Finished cost filter code and ran tests for displays. Havershin formula to calculate distances between 2 coordinates done to calculate distances in miles.Finding coordinates from the location query. Moved to bing from google for maps API.
 
 Actions:
-Develop distance filter, fix aesthetics/layout, update backlog, prepare for review, record test driven development example, combine branches. Get the distances
+Develop distance filter, fix aesthetics/layout, update backlog, prepare for review, record test driven development example, combine branches. Get the distances. Integrate distances with front-end. 
 
 Issues:
 All - GitHub isnt working, GitHub isnt working, merges arent happening, commits arent working(.vs creating problems).
@@ -149,14 +149,18 @@ Day 4:
 Members Present:
 Henry, Matthew, Topu, Arnav, Afzal
 
-Members Missing:
+Members Absent:
 Tony(illness)
 
 Summary of conversation:
+Fixed some github issues(updated UserStories with master code), Updated backlogs. Updated GitHub milestones and issues.  Fixing distance function(tables not showing distance), fixing GUI layout(Make map side by side with results), trying to implement pins on map. 
 
 Actions:
+Evidence video of TDD and subsequent report. Sprint Review and Report. Presentation preparation. Cleaning up code. Final pull requests. 
 
 Issues:
+All - Visual Studio file in local repository causes with pulling/pushing/comitting/merging with GitHub.
+Matthew - Entries dont scroll page does causing aesthetic issues, cant put side by side maps and results. 
 
 
 
