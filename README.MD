@@ -134,10 +134,14 @@ Members Present:
 Henry, Matthew, Tony, Topu, Arnav, Afzal
 
 Summary of conversation:
-Updated backlogs. Updated GitHub milestones and issues. Finished cost filter code and ran tests for displays. 
+Updated backlogs. Updated GitHub milestones and issues. Finished cost filter code and ran tests for displays. Havershin formula to calculate distances between 2 coordinates done to calculate distances. 
 
 Actions:
-Develop distance filter, fix aesthetics/layout, update backlog, prepare for review, record test driven development example, combine branches.
+Develop distance filter, fix aesthetics/layout, update backlog, prepare for review, record test driven development example, combine branches. Get the distances
+
+Issues:
+All - GitHub isnt working, GitHub isnt working, merges arent happening, commits arent working(.vs creating problems).
+
 
 --------------------------------------------------------------------------------------------------------
 
@@ -151,6 +155,8 @@ Tony(illness)
 Summary of conversation:
 
 Actions:
+
+Issues:
 
 
 
