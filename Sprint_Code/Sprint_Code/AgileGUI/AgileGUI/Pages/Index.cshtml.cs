@@ -66,9 +66,11 @@ namespace AgileGUI.Pages
         public async void OnGet()
         {
 
+
             UserInput = null;
             Filters = new Dictionary<string, double>();
             UseCurrLocation = UserLocation;
+            
 
             if (CostTo != null)
             {
@@ -99,6 +101,7 @@ namespace AgileGUI.Pages
 
             if ((UserInput != null) && (!TwoBoxes))
             {
+                
                 Data = new List<Dictionary<string, string>>();
                 RankedResults = new List<DataRow>();
                 //runs the input validation method
@@ -106,6 +109,18 @@ namespace AgileGUI.Pages
                 if (validate.validateCode(UserInput))
                 {
                     UserInput = validate.cleanInput;
+                     if (UseCurrLocation.Length == 0)
+                    {
+                        Console.WriteLine("Please enter location");
+                        // change to put message on screeen and don't search
+
+                    }
+                    else
+                    {
+                        (BingMap.mapInit(UseCurrLocation)).Wait();
+                        BingMap.CurrentLoc = UseCurrLocation;
+
+                    }
                     Searching search = new Searching();
                     List<DataRow> data = search.SearchByCode(UserInput, Filters);
 
@@ -158,7 +173,7 @@ namespace AgileGUI.Pages
 
                 }
 
-                if (UseCurrLocation.Length == 0)
+                /*if (UseCurrLocation.Length == 0)
                 {
                     Console.WriteLine("Please enter location");
                     // change to put message on screeen and don't search
@@ -166,9 +181,10 @@ namespace AgileGUI.Pages
                 }
                 else
                 {
-                    await BingMap.mapInit(UseCurrLocation);
+                    (BingMap.mapInit(UseCurrLocation)).Wait();
+                    BingMap.CurrentLoc = UseCurrLocation;
 
-                }
+                }*/
             }
             else
             {

@@ -10,11 +10,13 @@ namespace LocationsAndRouting
     public class BingMap
     {
         private static String answer;
-        String lng, lat;
+        public static double lng, lat;
+        private static string currentLoc;
 
         public static string Answer { get => answer; set => answer = value; }
-        public string Lng { get => lng; set => lng = value; }
-        public string Lat { get => lat; set => lat = value; }
+        public static double Lng { get => lng; set => lng = value; }
+        public static double Lat { get => lat; set => lat = value; }
+        public static string CurrentLoc { get => currentLoc; set => currentLoc = value; }
 
         public static async System.Threading.Tasks.Task mapInit(String query)
         {
@@ -48,6 +50,8 @@ namespace LocationsAndRouting
                 //Do something with the result.
 
                 Answer = result.Point.Coordinates[0] + " : " + result.Point.Coordinates[1];
+                lat = result.Point.Coordinates[0];
+                lng = result.Point.Coordinates[1];
             }
 
 
@@ -55,12 +59,12 @@ namespace LocationsAndRouting
         public double HaversineDistance(LatLng pos1, LatLng pos2)
         {
             double R = 3960;
-            var lat = ToRadians((pos2.Latitude - pos1.Latitude));
-            var lng = ToRadians((pos2.Longitude - pos1.Longitude));
-            var h1 = Math.Sin(lat / 2) * Math.Sin(lat / 2) +
+            double lat = ToRadians((pos2.Latitude - pos1.Latitude));
+            double lng = ToRadians((pos2.Longitude - pos1.Longitude));
+            double h1 = Math.Sin(lat / 2) * Math.Sin(lat / 2) +
                           Math.Cos(ToRadians(pos1.Latitude)) * Math.Cos(ToRadians(pos2.Latitude)) *
                           Math.Sin(lng / 2) * Math.Sin(lng / 2);
-            var h2 = 2 * Math.Asin(Math.Min(1, Math.Sqrt(h1)));
+            double h2 = 2 * Math.Asin(Math.Min(1, Math.Sqrt(h1)));
 
             double distance = Math.Round(R * h2);
 

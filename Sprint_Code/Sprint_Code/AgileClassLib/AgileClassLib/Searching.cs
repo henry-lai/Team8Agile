@@ -13,6 +13,8 @@ namespace AgileCmd
 
             searchResult = server.ReadDatabase(searchTerm, Filters);
 
+            
+
             return searchResult;
         }
 
