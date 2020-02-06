@@ -50,8 +50,57 @@ namespace LocationsAndRouting
                 Answer = result.Point.Coordinates[0] + " : " + result.Point.Coordinates[1];
             }
 
+
+        }
+        public double HaversineDistance(LatLng pos1, LatLng pos2, DistanceUnit unit)
+        {
+            double R = 3960;
+            var lat = ToRadians((pos2.Latitude - pos1.Latitude));
+            var lng = ToRadians((pos2.Longitude - pos1.Longitude));
+            var h1 = Math.Sin(lat / 2) * Math.Sin(lat / 2) +
+                          Math.Cos(ToRadians(pos1.Latitude)) * Math.Cos(ToRadians(pos2.Latitude)) *
+                          Math.Sin(lng / 2) * Math.Sin(lng / 2);
+            var h2 = 2 * Math.Asin(Math.Min(1, Math.Sqrt(h1)));
+
+            double distance = Math.Round(R * h2);
+
+            return distance;
         }
 
-    
+
+        public enum DistanceUnit { Miles, Kilometers };
+
+        public static double ToRadians(double val)
+        {
+            return (Math.PI / 180) * val;
+        }
+
+
+
     }
 }
+
+
+/// <summary>
+/// Specifies a Latitude / Longitude point.
+/// </summary>
+public class LatLng
+{
+    public double Latitude { get; set; }
+    public double Longitude { get; set; }
+
+    public LatLng()
+    {
+    }
+
+    public LatLng(double lat, double lng)
+    {
+        this.Latitude = lat;
+        this.Longitude = lng;
+    }
+}
+
+
+
+
+
