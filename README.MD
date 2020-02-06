@@ -3,17 +3,17 @@ AC31007/AC51003 Agile Software Engineering - Group Number 8
 
 Group Members:
 
-•	Henry Lai: 170010246
+â€¢	Henry Lai: 170010246
 
-•	Matthew Aston: 170020225  
+â€¢	Matthew Aston: 170020225  
 
-•	Afzal Miah: 170010026
+â€¢	Afzal Miah: 170010026
 
-•	Fayzuddin Topu: 170023859
+â€¢	Fayzuddin Topu: 170023859
 
-•	Arnav Dhawan: 180024498
+â€¢	Arnav Dhawan: 180024498
 
-•	Anthony Sweeney: 2399626
+â€¢	Anthony Sweeney: 2399626
 
   
 
@@ -126,5 +126,31 @@ Issues:
 Matthew, Tony, Afzal - issue with double entry in boxes, solved
 Henry - billing issue for Google Maps, looking at switching to bing instead
 All - GitHub issues, it wasnt updating the repo with a new version of files. 
+
+-------------------------------------------------------------------------------------------------------
+
+Day 3:
+Members Present:
+Henry, Matthew, Tony, Topu, Arnav, Afzal
+
+Summary of conversation:
+Updated backlogs. Updated GitHub milestones and issues. Finished cost filter code and ran tests for displays. 
+
+Actions:
+Develop distance filter, fix aesthetics/layout, update backlog, prepare for review, record test driven development example, combine branches.
+
+--------------------------------------------------------------------------------------------------------
+
+Day 4:
+Members Present:
+Henry, Matthew, Topu, Arnav, Afzal
+
+Members Missing:
+Tony(illness)
+
+Summary of conversation:
+
+Actions:
+
 
 
