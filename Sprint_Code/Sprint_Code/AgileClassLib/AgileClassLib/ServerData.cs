@@ -1,7 +1,9 @@
-﻿using System;
+﻿using LocationsAndRouting;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
 
 namespace AgileCmd
 {
@@ -70,8 +72,11 @@ namespace AgileCmd
 
                                 Address add = new Address(street, city, state, zip);
 
+                                
+
                                 DataRow dt = new DataRow(definition, providerID, providerName, add, reference, discharge, cost, 0);
 
+                                
 
                                 data.Add(dt);
                             }

@@ -16,7 +16,7 @@ namespace LocationsAndRouting
         public string Lng { get => lng; set => lng = value; }
         public string Lat { get => lat; set => lat = value; }
 
-        public static async System.Threading.Tasks.Task mapInit(String query)
+        public static async System.Threading.Tasks.Task<string> mapInit(String query)
         {
             //Console.WriteLine("Hello World!");
 
@@ -49,7 +49,7 @@ namespace LocationsAndRouting
 
                 Answer = result.Point.Coordinates[0] + " : " + result.Point.Coordinates[1];
             }
-
+            return Answer;
 
         }
         public double HaversineDistance(LatLng pos1, LatLng pos2)
