@@ -4,6 +4,7 @@ using System.Text;
 
 namespace AgileCmd
 {
+    // holds hostipital details and location coordinates
     public class DataRow
     {
         public string definition { get; set; }
@@ -54,6 +55,7 @@ namespace AgileCmd
             this.random = random;
         }
 
+        // set appropiate labels for the hospital
         public string CombineLabel() {
             string retVal = "";
             foreach (string x in label) {

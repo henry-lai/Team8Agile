@@ -16,7 +16,6 @@ namespace TestClass
         {
             BingMap map = new BingMap();
             await BingMap.mapInit("Dundee");
-            //map.setCoordinate();
             String expected = BingMap.Answer;
 
             StringAssert.Contains("56.46126937866211 : -2.967600107192993", expected);
@@ -25,8 +24,6 @@ namespace TestClass
         [Test]
         public async System.Threading.Tasks.Task mapInitVoidTestAsync()
         {
-            //await BingMap.mapInit("");
-
             Assert.That((Assert.ThrowsAsync<Exception>(async () => await BingMap.mapInit(""))).Message, Is.EqualTo("No Query or Address value specified."));
         }
 
@@ -48,8 +45,6 @@ namespace TestClass
             LatLng dundee = new LatLng(56.46913, -2.97489);
             LatLng glasgow = new LatLng(55.86515, -4.25763);
 
-
-            //Assert.AreEqual(m.HaversineDistance(dundee, glasgow), 64.81);
 
             Assert.That(m.HaversineDistance(dundee, glasgow), Is.EqualTo(64).Within(5.0));
         }

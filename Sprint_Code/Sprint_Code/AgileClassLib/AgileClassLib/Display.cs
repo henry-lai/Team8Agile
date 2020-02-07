@@ -7,58 +7,17 @@ namespace AgileCmd
 {
     public class Display
     {
-      
-
-        /*
-         * Input: List of type DataRow
-         * Ouptut: Void
-         * Populates objects list, no longer needed
-         
-       public void populateData(List<DataRow> newList) {
-
-
-            //listReceived = Search();
-
-            List<DataRow> tempList = new List<DataRow>();
-            tempList = newList;
-            if (validateList(newList) == true)
-            {
-            //    Console.WriteLine("Recieved Valid List");
-            }
-            else if(validateList(newList) == false)
-            {
-                newList = tempList;
-              //  Console.WriteLine("Recieved InValid List");
-            }
-        }
-        */
-
-
-            /*
-             * Input: List of type DataRow
-             * OutPut: true or false
-             * Function: Checks for empty list, if empty return false
-             */
+        // check the list is empty or not
         public bool validateList(List<DataRow> listToValidate)
         {
-
-
             if(listToValidate.Count < 1)
             {
                 return false;
-              //  Console.WriteLine("Empty List");
             }
-
-         
             return true;
         }
 
-
-        /*
-             * Input: List of type DataRow
-             * OutPut: Void
-             * Function: Displays every entry in list to console
-             */
+        // display the full list
         public void displayFullList(List<DataRow> listToDisplay)
         {
             //populate display list with data given from search
@@ -70,62 +29,42 @@ namespace AgileCmd
 
         }
 
-
-        /*
-             * Input: List of type DataRow
-             * OutPut: DataRow min
-             * Function: Goes through list and finds and returns cheapest entry
-             */
+        // find the cheapest hospital
         public DataRow findCheapest(List<DataRow> listToCheck)
         {
             DataRow min = new DataRow();
-            min.cost = 100000000000;
+            min.cost = 100000000000;  // set very big value so that we can find the smallest value
             for (int i = 0; i < listToCheck.Count; i++)
             {
                 if(listToCheck[i].cost < min.cost)
                 {
-                 //   listToCheck[i].
                     min = listToCheck[i];
-                  
                 }
             }
-            min.label.Add("Cheapest");
+            min.label.Add("Cheapest"); // set the Cheapest label on the hospital
             return min;
         }
 
-
-        /* Input: List of type DataRow
-             * OutPut: DataRow min
-             * Function: Goes through list and finds and returns entry with smallest distance
-             */
+        // find the closest hospital from the user
         public DataRow findSmallestDistance(List<DataRow> listToCheck)
         {
             DataRow min = new DataRow();
-            min.distanceFromUser = 1000000000000;
+            min.distanceFromUser = 1000000000000;  // set very big value so that we can find the smallest value
             for (int i = 0; i < listToCheck.Count; i++)
             {
                 if (listToCheck[i].distanceFromUser < min.distanceFromUser)
                 {
-                   
                     min = listToCheck[i];
-                   
                 }
 
             }
-            min.label.Add("Closest");
+            min.label.Add("Closest"); // set the Closest label on the hospital
             return min;
         }
 
-        /*
-             * Input: List of type DataRow
-             * OutPut: lst of type DataRow
-             * Function: Sorts inputted list by cost ascending
-             */
-
+        // sort hospital by cost and return the sorted list
         public List<DataRow> sortCost(List<DataRow> listToSort)
         {
-            Console.WriteLine("THIS IS SORTED LIST COST");
-
             IEnumerable<DataRow> query = listToSort.OrderBy(DataRow => DataRow.cost);
 
             foreach(DataRow datarow in query)
@@ -138,11 +77,7 @@ namespace AgileCmd
 
         }
 
-        /*
-             * Input: List of type DataRow
-             * OutPut: lst of type DataRow
-             * Function: Sorts inputted list by Distance ascending
-             */
+        // sort hospital by distance and return the sorted list
         public List<DataRow> sortDistance(List<DataRow> listToSort)
         {
             Console.WriteLine("THIS IS SORTED LIST DISTANCE");
@@ -158,11 +93,7 @@ namespace AgileCmd
             return listToSort;
         }
 
-        /*
-             * Input: List of type DataRow
-             * OutPut: lst of type DataRow
-             * Function: Sorts inputted list by score ascending
-             */
+        // sort hospital in a rank according to distance and cost and return the sorted list
         public List<DataRow> sortRank(List<DataRow> listToSort)
         {
 
@@ -180,11 +111,7 @@ namespace AgileCmd
             return listToSort;
         }
 
-        /*
-             * Input: List of type DataRow
-             * OutPut: lst of type DataRow
-             * Function: calculates and assigns score to each entry in list
-             */
+        // set score for each hospital
         public List<DataRow> setScore(List<DataRow> listToSort) {
             listToSort = setDistanceRanking(listToSort);
             listToSort = setCostRanking(listToSort);
@@ -195,11 +122,7 @@ namespace AgileCmd
             return listToSort;
         }
 
-        /*
-             * Input: List of type DataRow
-             * OutPut: DataRow best
-             * Function: finds and returns entry with highest score 
-             */
+        // find the best hospital, based on the score
         public DataRow findBest(List<DataRow> listToSort)
         {
             setCostRanking(listToSort);
@@ -214,30 +137,21 @@ namespace AgileCmd
                 listToSort[i].score = listToSort[i].costRank * listToSort[i].distanceRank;
                 if(listToSort[i].score > best.score)
                 {
-                    
                     best = listToSort[i];
-                    //label
                 }
                 if(listToSort[i].score == best.score)
                 {
                     if (listToSort[i].costRank > best.costRank)
                     {
-                       
                         best = listToSort[i];
-                       
                     }
                 }
             }
-            best.label.Add("Best");
+            best.label.Add("Best"); // set the Best label for the hospital
             return best;
         }
 
-
-/*
-             * Input: List of type DataRow
-             * OutPut: lst of type DataRow
-             * Function: calculates and assigns score to each entry in list
-             */
+        // ranking hospital according to the cost and return the sorted list
         public List<DataRow> setCostRanking(List<DataRow> listToSort)
         {
             listToSort = sortCost(listToSort);
@@ -249,12 +163,7 @@ namespace AgileCmd
             return listToSort;
         }
 
-
-        /*
-                     * Input: List of type DataRow
-                     * OutPut: lst of type DataRow
-                     * Function: calculates and assigns Distance to each entry in list
-                     */
+        // ranking hospital according to the distance and return the sorted list
         public List<DataRow> setDistanceRanking(List<DataRow> listToSort)
         {
             listToSort = sortDistance(listToSort);
@@ -266,51 +175,28 @@ namespace AgileCmd
             return listToSort;
         }
 
-
-        /*
-                     * Input: List of type DataRow
-                     * OutPut: void
-                     * Function: finds closest entry in list and displays to console
-                     */
+        // display the closest hospital
         public void displayClosest(List<DataRow> listToCheck)
         {
             Console.WriteLine("This is the Closest Entry");
             displayLine(findSmallestDistance(listToCheck));
         }
 
-
-        /*
-                     * Input: List of type DataRow
-                     * OutPut: void
-                     * Function: finds best entry in list and displays to console
-                     */
+        // display the best hospital
         public void displayBest(List<DataRow> listToSort)
         {
             Console.WriteLine("This is the Best Entry");
             displayLine(findBest(listToSort));
-        //    Console.WriteLine(data[2].cost);
-
         }
 
-
-        /*
-                     * Input: List of type DataRow
-                     * OutPut: void
-                     * Function: finds cheapest entry in list and displays to console
-                     */
+        // display the cheapest hospital
         public void displayCheapest(List<DataRow> listToShow)
         {
             Console.WriteLine("This is the Cheapest Entry");
             displayLine(findCheapest(listToShow));
         }
 
-
-
-        /*
-             * Input:DataRow data
-             * OutPut: void
-             * Function: displays full list
-             */
+        // testing display on the cmd version of the program
         private void displayLine(DataRow data)
         {
             Console.Write(data.definition + " - ");
