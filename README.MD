@@ -163,4 +163,17 @@ All - Visual Studio file in local repository causes with pulling/pushing/comitti
 Matthew - Entries dont scroll page does causing aesthetic issues, cant put side by side maps and results. 
 
 
+--------------------------------------------------------------------------------------------------------
 
+Day 5:
+Members Present:
+Henry, Tony, Matthew, Topu, Arnav, Afzal
+
+Summary of conversation:
+Tony updated the group with the work he carried out the previous day while ill, additions to the location code and the distance calculations.  The rest of the group updated him with what they'd done the previous day.  Updated backlogs, final code review and checked code comments.  
+
+Actions:
+Last scrum so no actions.
+
+Issues:
+Sprint Backlog burndown chart was not working corectly so have had to make a new file with the chart. 
