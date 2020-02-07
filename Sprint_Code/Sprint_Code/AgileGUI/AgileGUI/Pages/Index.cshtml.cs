@@ -40,6 +40,8 @@ namespace AgileGUI.Pages
 
         public static string UserInput = "";
         public static double MaxCost { get; set; }
+        public static double MaxDistance { get; set; }
+
 
         public static string useCurrLocation = "";
 
@@ -63,14 +65,12 @@ namespace AgileGUI.Pages
 
         }
 
-        public async void OnGet()
+        public async Task OnGet()
         {
-
-
+            Task<string> UserCords;
             UserInput = null;
             Filters = new Dictionary<string, double>();
             UseCurrLocation = UserLocation;
-            
 
             if (CostTo != null)
             {
@@ -81,6 +81,16 @@ namespace AgileGUI.Pages
                 MaxCost = Double.MaxValue;
             }
             Filters.Add("MaxCost", MaxCost);
+
+            if (DistanceAway != null)
+            {
+                MaxDistance = Convert.ToDouble(DistanceAway);
+            }
+            else 
+            {
+                MaxDistance = Double.MaxValue;
+            }
+            Filters.Add("MaxDistance", MaxDistance);
 
             if ((SearchString != null) && (SearchStringDesc != null))
             {
@@ -109,21 +119,42 @@ namespace AgileGUI.Pages
                 if (validate.validateCode(UserInput))
                 {
                     UserInput = validate.cleanInput;
-                     if (UseCurrLocation.Length == 0)
+                    Searching search = new Searching();
+
+                    if (UseCurrLocation.Length == 0)
                     {
-                        Console.WriteLine("Please enter location");
+                        // Console.WriteLine("Please enter location");
                         // change to put message on screeen and don't search
+
+                        UserCords = BingMap.mapInit("Glasgow");
+                        await UserCords;
 
                     }
                     else
                     {
-                        (BingMap.mapInit(UseCurrLocation)).Wait();
-                        BingMap.CurrentLoc = UseCurrLocation;
+                        UserCords  = BingMap.mapInit(UseCurrLocation);
+                        await UserCords;
+                    }
+                    DataRow y = new DataRow();
+                    y.SetCords(UserCords.Result);
+
+                    List<DataRow> data = search.SearchByCode(UserInput, Filters);
+                    List<DataRow> ToBeRemoved = new List<DataRow>();
+                    foreach (DataRow dt in data)
+                    {
+                        Task<string> cords = BingMap.mapInit(dt.address.Street + ", " + dt.address.City + "," + dt.address.State);
+                        await cords;
+                        dt.SetCords(cords.Result);
+
+                        dt.distanceFromUser = new BingMap().HaversineDistance(y.cords, dt.cords);
+
+                        if (dt.distanceFromUser > Filters["MaxDistance"]) { ToBeRemoved.Add(dt); }
 
                     }
-                    Searching search = new Searching();
-                    List<DataRow> data = search.SearchByCode(UserInput, Filters);
 
+                    foreach (DataRow dt in ToBeRemoved) {
+                        data.Remove(dt);
+                    }
 
                     if (data.Count == 0)
                     {
@@ -173,18 +204,7 @@ namespace AgileGUI.Pages
 
                 }
 
-                /*if (UseCurrLocation.Length == 0)
-                {
-                    Console.WriteLine("Please enter location");
-                    // change to put message on screeen and don't search
-
-                }
-                else
-                {
-                    (BingMap.mapInit(UseCurrLocation)).Wait();
-                    BingMap.CurrentLoc = UseCurrLocation;
-
-                }*/
+                
             }
             else
             {

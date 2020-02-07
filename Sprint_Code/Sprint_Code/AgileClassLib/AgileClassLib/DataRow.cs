@@ -22,6 +22,8 @@ namespace AgileCmd
         private int discharge;
         private Random random;
 
+        public LatLng cords { get; set; }
+
         public DataRow(string definition, string providerID, string providerName, Address address, string reference, long totalDischarge, double cost, double distanceFromUser)
         {
             this.cost = cost;
@@ -60,6 +62,14 @@ namespace AgileCmd
             }
             return retVal;
         }
-        
+
+        public void SetCords(string c) {
+            cords = new LatLng();
+            string[] Vals = c.Split(':');
+            cords.Latitude = Convert.ToDouble(Vals[0]);
+            cords.Longitude = Convert.ToDouble(Vals[1]);
+
+        }
+
     }
 }

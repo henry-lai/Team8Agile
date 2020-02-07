@@ -1,8 +1,9 @@
-﻿using System;
+﻿using LocationsAndRouting;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using LocationsAndRouting;
+using System.Threading.Tasks;
 
 
 namespace AgileCmd
@@ -55,8 +56,7 @@ namespace AgileCmd
 
                     using (SqlDataReader oReader = oCommand.ExecuteReader())
                     {
-                        /*LatLng userLoc = new LatLng(BingMap.Lat, BingMap.Lng);
-                        BingMap bmap = new BingMap();*/
+                        
                         while (oReader.Read())
                         {
                             if (Convert.ToDouble(oReader["average_total_payments"].ToString()) <= Filters["MaxCost"]) {
@@ -73,14 +73,11 @@ namespace AgileCmd
 
                                 Address add = new Address(street, city, state, zip);
 
-                                /*DistanceFinder.findLocation(add);
-                                LatLng hospitalLoc = new LatLng(BingMap.lat, BingMap.lng);
-                                double distanceFromUser = bmap.HaversineDistance(userLoc, hospitalLoc);*/
+                                
 
-                                Random rand = new Random();
+                                DataRow dt = new DataRow(definition, providerID, providerName, add, reference, discharge, cost, 0);
 
-                                DataRow dt = new DataRow(definition, providerID, providerName, add, reference, discharge, cost, rand.Next(3, 3000));
-
+                                
 
                                 data.Add(dt);
                             }
@@ -103,14 +100,6 @@ namespace AgileCmd
             }
             return data;
 
-        }
-    }
-
-    public class DistanceFinder
-    {
-        public static async void findLocation(Address add)
-        {
-            await BingMap.mapInit(add.DisplayAddress());
         }
     }
 }
