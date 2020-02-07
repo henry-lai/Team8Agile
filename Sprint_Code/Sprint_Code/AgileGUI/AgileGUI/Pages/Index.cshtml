@@ -17,10 +17,18 @@
             <input type="text" placeholder="Description" asp-for="SearchStringDesc" style="width: 300px;" />
 
         </p>
+        <div class="pr-1 pb-2">
+            Use current location
+            <input type="radio" asp-for="UseCurrLocation" value="yes" />
+
+            or Enter a location
+            <input type="text" placeholder=" 221B Baker Street" asp-for="UserLocation" style="width: 200px;" />
+        </div>
         <input class="btn btn-primary" type="submit" value="Search" />
         <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
             Filters
         </a>
+
 
 
 
@@ -34,13 +42,7 @@
                 <div class="container">
 
                     <p>
-                        <div class="pr-1 pb-2">
-                            Use current location
-                            <input type="radio" asp-for="UseCurrLocation" value="yes" />
 
-                            or Enter a location
-                            <input type="text" placeholder=" 221B Baker Street" asp-for="UserLocation" style="width: 200px;" />
-                        </div>
                         <div class="pr-1 pb-2">
 
                             Set Max Cost
@@ -81,196 +83,215 @@ else
 {
     @if (IndexModel.UserInput != null)
     {
+
         <script>showLatLon();</script>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4">
 
-        <div class="tab">
-            <button class="tablinks" onclick="openCity(event, 'Top Hits')" id="defaultOpen">Top Hits</button>
-            <button class="tablinks" onclick="openCity(event, 'Map')">Map</button>
-            <button class="tablinks" onclick="openCity(event, 'All Results')">All Results</button>
-        </div>
+                    <div class="tab">
+                        <button class="tablinks" onclick="openCity(event, 'Top Hits')" id="defaultOpen">Top Hits</button>
 
-        <div id="Top Hits" class="tabcontent">
-
-
-            <table class="table">
-
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>
-                            Procedure
-                        </th>
-                        <th>
-                            Facility Name
-                        </th>
-                        <th>
-                            Address
-                        </th>
-
-                        <th>
-                            Cost $
-                        </th>
-                        <th>
-                            Distance
-                        </th>
-
-                    </tr>
-                </thead>
+                        <button class="tablinks" onclick="openCity(event, 'All Results')">All Results</button>
+                    </div>
 
 
-                <tbody>
-                    @foreach (var item in IndexModel.RankedResults)
-                    {
-                   
-                        <tr>
-                            <td>
-                                @item.CombineLabel()
-                            </td>
+                    <div id="Top Hits" class="tabcontent" style="height:500px;overflow: auto;font-size: 12px">
 
-                            <td>
-                                @item.definition
-                            </td>
 
-                            <td>
-                                @item.providerName
-                            </td>
-                            <td>
-                                @item.address.DisplayAddress()
-                            </td>
+                        <table class="table">
 
-                            <td>
-                                @string.Format("{0:0.00}", item.cost)
-                            </td>
-                            <td>
-                                @item.distanceFromUser
-                            </td>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>
+                                        Procedure
+                                    </th>
+                                    <th>
+                                        Facility Name
+                                    </th>
+                                    <th>
+                                        Address
+                                    </th>
 
+                                    <th>
+                                        Cost $
+                                    </th>
+                                    <th>
+                                        Distance(m)
+                                    </th>
+
+
+                                </tr>
+                            </thead>
+
+
+
+                            <tbody>
+                                @foreach (var item in IndexModel.RankedResults)
+                                {
+
+                                    <tr>
+                                        <td>
+                                            @item.CombineLabel()
+                                        </td>
+
+                                        <td>
+                                            @item.definition
+                                        </td>
+
+                                        <td>
+                                            @item.providerName
+                                        </td>
+                                        <td>
+                                            @item.address.DisplayAddress()
+                                        </td>
+
+                                        <td>
+                                            @string.Format("{0:0.00}", item.cost)
+                                        </td>
+                                        <td>
+                                            @item.distanceFromUser
+                                        </td>
 
 
                         </tr>
                         
 
-                    }
-                </tbody>
 
-            </table>
+                                    </tr>
 
-        </div>
+                                }
+                            </tbody>
 
-        <div id="Map" class="tabcontent">
+                        </table>
 
-          
-            <div id="myMap" style="width: 57.5%; height: 50%; position: absolute;"></div>
-                        <script type="text/javascript">
- 
-                            function loadMapScenario() {
-                                var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {});
-                                navigator.geolocation.getCurrentPosition(function (position) {
-                                    var loc = new Microsoft.Maps.Location(
-                                        position.coords.latitude,
-                                        position.coords.longitude);
+                    </div>
 
-                                    //Add a pushpin at the user's location.
-                                    var pin = new Microsoft.Maps.Pushpin(loc);
-                                    map.entities.push(pin);
 
-                                    map.setView({ mapTypeId: Microsoft.Maps.MapTypeId.road, center: loc, zoom: 15 });
 
-                                });
+                    <div id="All Results" class="tabcontent" style="height:500px;overflow: auto; font-size: 12px">
+
+
+                        <table class="table">
+                            @if (IndexModel.UserInput != null)
+                            {
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>
+                                            Procedure
+                                        </th>
+                                        <th>
+                                            Facility Name
+                                        </th>
+                                        <th>
+                                            Address
+                                        </th>
+
+                                        <th>
+                                            Cost $
+                                        </th>
+                                        <th>
+                                            Distance(m)
+                                        </th>
+
+                                    </tr>
+                                </thead>
+
+
+                                <tbody>
+                                    @foreach (var item in IndexModel.Data)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item["Label"]
+                                            </td>
+
+                                            <td>
+                                                @item["Description"]
+                                            </td>
+
+                                            <td>
+                                                @item["Name"]
+                                            </td>
+                                            <td>
+                                                @item["Address"], @item["City"], @item["State"], @item["Zip"]
+                                            </td>
+
+                                            <td>
+                                                @string.Format("{0:0.00}", Convert.ToDouble(item["Cost"]))
+                                            </td>
+                                            <td>
+                                                @item["Distance"]
+                                            </td>
+
+
+
+                                        </tr>
                                     }
-                        
-               function showLatLon() {
-                    map.entities.clear();
- 
-                    var lat = document.getElementById(BingMap.Lat).value;
-                    var lon = document.getElementById(BingMap.Lng).value;
- 
-                    if (isLatLonValid(lat, lon) == false) {
-                        alert("Please enter valid location.");
-                        return false;
-                    }
- 
-                    var latlonLocation = new Microsoft.Maps.Location(lat, lon);
-                    map.setView({ zoon: 12, center: latlonLocation });
-                    var pushpin = createPushpin(latlonLocation, "1");
-                    pushpin.geoname = "Manually entered location";
- 
-                    map.entities.push(pushpin);
-                    showInfoBox(pushpin);
- 
-                }
-            </script>
+                                </tbody>
+                            }
+                        </table>
 
-        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div id="myMap" style="width: 100%; height: 100%; position: absolute;"></div>
+                    <script type="text/javascript">
 
+                        function loadMapScenario() {
+                            var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {});
+                            navigator.geolocation.getCurrentPosition(function (position) {
+                                var loc = new Microsoft.Maps.Location(
+                                    position.coords.latitude,
+                                    position.coords.longitude);
 
+                                //Add a pushpin at the user's location.
+                                var pin = new Microsoft.Maps.Pushpin(loc);
+                                map.entities.push(pin);
 
-        <div id="All Results" class="tabcontent">
+                                map.setView({ mapTypeId: Microsoft.Maps.MapTypeId.road, center: loc, zoom: 15 });
 
-
-            <table class="table">
-                @if (IndexModel.UserInput != null)
-                {
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>
-                                Procedure
-                            </th>
-                            <th>
-                                Facility Name
-                            </th>
-                            <th>
-                                Address
-                            </th>
-
-                            <th>
-                                Cost $
-                            </th>
-                            <th>
-                                Distance
-                            </th>
-
-                        </tr>
-                    </thead>
-
-
-                    <tbody>
-                        @foreach (var item in IndexModel.Data)
-                        {
-                            <tr>
-                                <td>
-                                    @item["Label"]
-                                </td>
-
-                                <td>
-                                    @item["Description"]
-                                </td>
-
-                                <td>
-                                    @item["Name"]
-                                </td>
-                                <td>
-                                    @item["Address"], @item["City"], @item["State"], @item["Zip"]
-                                </td>
-
-                                <td>
-                                    @string.Format("{0:0.00}", Convert.ToDouble(item["Cost"]))
-                                </td>
-                                <td>
-                                    @item["Distance"]
-                                </td>
-
-
-
-                            </tr>
+                            });
                         }
-                    </tbody>
-                }
-            </table>
+
+                        function showLatLon() {
+                            map.entities.clear();
+
+                            var lat = document.getElementById(BingMap.Lat).value;
+                            var lon = document.getElementById(BingMap.Lng).value;
+
+                            if (isLatLonValid(lat, lon) == false) {
+                                alert("Please enter valid location.");
+                                return false;
+                            }
+
+                            var latlonLocation = new Microsoft.Maps.Location(lat, lon);
+                            map.setView({ zoon: 12, center: latlonLocation });
+                            var pushpin = createPushpin(latlonLocation, "1");
+                            pushpin.geoname = "Manually entered location";
+
+                            map.entities.push(pushpin);
+                            showInfoBox(pushpin);
+
+                        }
+                    </script>
+                </div>
+            </div>
 
         </div>
+
+
+
+
+
+
     }
+
+
+
+
     else if (IndexModel.TwoBoxes)
     {
         <p>
@@ -294,6 +315,12 @@ else
         </p>
     }
 }
+
+
+
+
+
+
 
 <script>
     function openCity(evt, cityName) {
