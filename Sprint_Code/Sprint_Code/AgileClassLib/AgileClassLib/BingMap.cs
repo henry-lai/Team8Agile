@@ -7,9 +7,11 @@ using System.Runtime.Serialization.Json;
 
 namespace LocationsAndRouting
 {
+
+    // handle bing map functions and requests
     public class BingMap
     {
-        private static String answer;
+        private static string answer;
         public static double lng, lat;
         private static string currentLoc;
 
@@ -18,10 +20,9 @@ namespace LocationsAndRouting
         public static double Lat { get => lat; set => lat = value; }
         public static string CurrentLoc { get => currentLoc; set => currentLoc = value; }
 
+        // search for coordinates using given query
         public static async System.Threading.Tasks.Task<string> mapInit(String query)
         {
-            //Console.WriteLine("Hello World!");
-
             //Create a request.
             var request = new GeocodeRequest()
             {
@@ -42,13 +43,6 @@ namespace LocationsAndRouting
                 response.ResourceSets[0].Resources.Length > 0)
             {
                 var result = response.ResourceSets[0].Resources[0] as BingMapsRESTToolkit.Location;
-                /*String lng = result.Point.Coordinates[0].ToString();
-                String lat = result.Point.Coordinates[1].ToString();*/
-
-                //Console.WriteLine(lng, lat);
-
-                //Do something with the result.
-
                 Answer = result.Point.Coordinates[0] + " : " + result.Point.Coordinates[1];
                 lat = result.Point.Coordinates[0];
                 lng = result.Point.Coordinates[1];
@@ -56,9 +50,13 @@ namespace LocationsAndRouting
             return Answer;
 
         }
+        
+
+
+        // Calculate distance between two coordinates
         public double HaversineDistance(LatLng pos1, LatLng pos2)
         {
-            double R = 3960;
+            double R = 3960; // used to calculate the distance in miles
             double lat = ToRadians((pos2.Latitude - pos1.Latitude));
             double lng = ToRadians((pos2.Longitude - pos1.Longitude));
             double h1 = Math.Sin(lat / 2) * Math.Sin(lat / 2) +
@@ -72,8 +70,8 @@ namespace LocationsAndRouting
         }
 
 
-        //public enum DistanceUnit { Miles, Kilometers };
 
+        // convert degree to radian
         public static double ToRadians(double val)
         {
             return (Math.PI / 180) * val;
@@ -83,6 +81,8 @@ namespace LocationsAndRouting
 
     }
 }
+
+
 
 
 /// <summary>

@@ -6,10 +6,20 @@
 
 
 
+
+
+<!--
+    Welcome message at top of screen
+    -->
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Use the box below to search for and compare your health care options</p>
 
+
+    <!--
+        Search boxes for the procedure and code
+
+    -->
     <form>
         <p>
             <input type="text" placeholder="Code" asp-for="SearchString" style="width: 300px;" />
@@ -17,6 +27,11 @@
             <input type="text" placeholder="Description" asp-for="SearchStringDesc" style="width: 300px;" />
 
         </p>
+
+        <!--
+            Option for using current location, and a input box for entering an address
+
+        -->
         <div class="pr-1 pb-2">
             Use current location
             <input type="radio" asp-for="UseCurrLocation" value="yes" />
@@ -38,6 +53,13 @@
 
             <p>Use the filters to narrow the search</p>
 
+
+            <!--
+                drop down filters on the screen
+                one for entering the max distance
+                and one for entering the max cost
+
+            -->
             <div class="form-group row">
                 <div class="container">
 
@@ -45,7 +67,7 @@
 
                         <div class="pr-1 pb-2">
 
-                            Set Max Cost   
+                            Set Max Cost
                             <input type="text" placeholder="$" asp-for="CostTo" style="width: 150px;" />
                         </div>
 
@@ -84,6 +106,14 @@ else
     @if (IndexModel.UserInput != null)
     {
 
+
+        <!--
+            uses as container with 2 colums to store the results first and then the map
+            results are shown as two tabs and the map is static on the right
+            results table has overflow set to auto to allow scrolable lists
+            when size of table exceeds the set height
+
+        -->
         <script>showLatLon();</script>
         <div class="container-fluid">
             <div class="row">
@@ -132,36 +162,36 @@ else
                                 @foreach (var item in IndexModel.RankedResults)
                                 {
 
-                                <tr>
-                                    <td>
-                                        @item.CombineLabel()
-                                    </td>
+                                    <tr>
+                                        <td>
+                                            @item.CombineLabel()
+                                        </td>
 
-                                    <td>
-                                        @item.definition
-                                    </td>
+                                        <td>
+                                            @item.definition
+                                        </td>
 
-                                    <td>
-                                        @item.providerName
-                                    </td>
-
-
-                                    <td>
-                                        @string.Format("{0:0.00}", item.cost)
-                                    </td>
-                                    <td>
-                                        @item.distanceFromUser
-                                    </td>
-                                    <td>
-                                        @item.address.DisplayAddress()
-                                    </td>
+                                        <td>
+                                            @item.providerName
+                                        </td>
 
 
-                                </tr>
-                        
+                                        <td>
+                                            @string.Format("{0:0.00}", item.cost)
+                                        </td>
+                                        <td>
+                                            @item.distanceFromUser
+                                        </td>
+                                        <td>
+                                            @item.address.DisplayAddress()
+                                        </td>
 
 
-                                    
+                                    </tr>
+
+
+
+
 
                                 }
                             </tbody>
@@ -185,7 +215,7 @@ else
                                             Procedure
                                         </th>
                                         <th>
-                                            Facility Name     
+                                            Facility Name
                                         </th>
 
 
@@ -196,7 +226,7 @@ else
                                             Distance(m)
                                         </th>
                                         <th>
-                                            Address 
+                                            Address
                                         </th>
                                     </tr>
                                 </thead>
@@ -205,32 +235,32 @@ else
                                 <tbody>
                                     @foreach (var item in IndexModel.Data)
                                     {
-                                    <tr>
-                                        <td>
-                                            @item["Label"]
-                                        </td>
+                                        <tr>
+                                            <td>
+                                                @item["Label"]
+                                            </td>
 
-                                        <td>
-                                            @item["Description"]
-                                        </td>
+                                            <td>
+                                                @item["Description"]
+                                            </td>
 
-                                        <td>
-                                            @item["Name"]
-                                        </td>
-
-
-                                        <td>
-                                            @string.Format("{0:0.00}", Convert.ToDouble(item["Cost"]))
-                                        </td>
-                                        <td>
-                                            @item["Distance"]
-                                        </td>
-                                        <td>
-                                            @item["Address"], @item["City"], @item["State"], @item["Zip"]
-                                        </td>
+                                            <td>
+                                                @item["Name"]
+                                            </td>
 
 
-                                    </tr>
+                                            <td>
+                                                @string.Format("{0:0.00}", Convert.ToDouble(item["Cost"]))
+                                            </td>
+                                            <td>
+                                                @item["Distance"]
+                                            </td>
+                                            <td>
+                                                @item["Address"], @item["City"], @item["State"], @item["Zip"]
+                                            </td>
+
+
+                                        </tr>
                                     }
                                 </tbody>
                             }
@@ -238,6 +268,13 @@ else
 
                     </div>
                 </div>
+
+                <!--
+                    right section of the screen holding the map
+                    width and height are set to 100% to provide dynamic
+                    screen resizing
+
+                -->
                 <div class="col-lg-7">
                     <div id="myMap" style="width: 100%; height: 100%; position: absolute;"></div>
                     <script type="text/javascript">

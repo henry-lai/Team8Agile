@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace AgileCmd
 {
+    // stablish connection with the server
     public class ServerData
     {
         public List<DataRow> data { get; set; }
@@ -17,6 +18,7 @@ namespace AgileCmd
 
         public ServerData()
         {
+            // connection string to stablish connection with the database
             connectionString = "Server = tcp:agileuniprojectserver.database.windows.net,1433; " +
                 "Initial Catalog = AgileDB; " +
                 "Persist Security Info = False; " +
@@ -28,6 +30,7 @@ namespace AgileCmd
                 "Connection Timeout = 30;";
         }
 
+        // pull out data from the database and return result as a List
         public List<DataRow> ReadDatabase(string searchItem, Dictionary<string,double> Filters) {
             conn = new SqlConnection(connectionString);
 
@@ -71,28 +74,19 @@ namespace AgileCmd
                                 int discharge = Convert.ToInt32(oReader["total_discharges"].ToString());
                                 Double cost = Convert.ToDouble(oReader["average_total_payments"].ToString());
 
+                                // create hospital object
                                 Address add = new Address(street, city, state, zip);
-
-                                
-
                                 DataRow dt = new DataRow(definition, providerID, providerName, add, reference, discharge, cost, 0);
 
                                 
-
+                                // adding search results in a list
                                 data.Add(dt);
                             }
 
                         }
-
-
-                        // distance meth9od
-
-                        //
                     }
-
                 }
-
-                conn.Close();
+                conn.Close(); // close the database connection
             }
             catch (Exception ex)
             {
