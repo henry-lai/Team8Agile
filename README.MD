@@ -1,3 +1,4 @@
+This Repository contains work done for an assignment for Module AC31007 for University of Dundee. It involves creating an app for Craneware to help patients around the US to compare prices of procedures across different hospitals, allowing them to reclaim the ability to find the most affordable care in their area.
 
 AC31007/AC51003 Agile Software Engineering - Group Number 8
 
